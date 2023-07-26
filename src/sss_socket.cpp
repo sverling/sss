@@ -27,6 +27,7 @@
 #include "sss_assert.h"
 
 #include <sstream>
+#include <cstring>
 using namespace std;
 
 Sss_socket::Sss_socket(bool & success)

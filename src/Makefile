@@ -13,14 +13,14 @@
 # gle 3.0.7
 # glut 3.7
 CC = g++
-OPT_FLAGS = -O3 -ffast-math -finline-functions
+OPT_FLAGS = -O3 -ffast-math -finline-functions -fpermissive
 # -Wall -pedantic
 DEBUG_FLAGS = -g -Wall -pedantic
-EXTRA_FLAGS = -L${HOME}/external_linux/include -I/usr/X11R6/include -DWITH_GL_EXT -DWITH_GLUI -DWITH_GLE -DWITH_PLIB -DUSE_FUNCTION -DWITH_FMOD
+EXTRA_FLAGS = -L${HOME}/external_linux/include -I/usr/X11R6/include -DWITH_GL_EXT -DWITH_GLUI -DWITH_GLE  -DUSE_FUNCTION
 # use -lfmodex64 for 64bit platform
 LIBFMOD     = -lfmodex
 # Add  -lplibsm -lplibsl  to LDFLAGS if you're not using FMOD, but you are using PLIB
-LDFLAGS = -L${HOME}/external_linux/lib -L/usr/X11R6/lib64 -L/usr/X11R6/lib -lpthread -lplibjs -lplibfnt -lplibsg -lplibul -lglui -lglut -lgle -lGLU -lGL -lX11 -lXmu $(LIBFMOD) -lpng
+LDFLAGS = -L${HOME}/external_linux/lib -L/usr/X11R6/lib64 -L/usr/X11R6/lib -lpthread -lglui -lglut -lgle -lGLU -lGL -lX11 -lXmu -lpng
 
 SRC = \
 3ds.cpp \

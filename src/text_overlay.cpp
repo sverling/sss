@@ -10,6 +10,7 @@
 #endif
 #include "sss_glut.h"
 #include <stdio.h>
+#include <cstring>
 
 int Text_overlay::add_entry(int x, int y, const char * text)
 {
