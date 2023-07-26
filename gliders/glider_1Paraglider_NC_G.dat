@@ -1,0 +1,23 @@
+# Done by Esteban Ruiz on August 2006 - cerm78@gmail.com
+# This glider file describes a Paraglider using a "Normal" Control method.
+
+##### This section contains general glider data ######
+
+mass      70
+I_x       100 	# Moment of inertia about x (eje ancho)
+I_y       100	# Moment of inertia about y (eje largo)
+I_z       100 	# Moment of inertia about z (eje alto)
+
+aero_file      glider_1Paraglider_NC.dat  # file containing the aerodynamic data
+structure_file glider_1Paraglider_NC.dat  # file containing the structure data
+graphics_file  glider_1Paraglider_NC_G.dat  # file containing the graphics data
+engine_file    glider_1Paraglider_NC.dat  # file containing the engine data
+
+aero_type      component
+structure_type component
+graphics_type  3ds
+engine_type    default
+
+3ds_file	Paraglider_G.3ds				# To use the GREEN paraglider file
+cull_backface true
+

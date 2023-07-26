@@ -1,0 +1,161 @@
+<html>
+<head>
+<title>Slope Soaring Simulator overview.</title>
+</head>
+<body bgcolor="#ffffff">
+
+<p><table cellpadding=5 width=100%>
+<tr align=center>
+<td><img src="sss.jpg" alt="Slope Soaring Simulator"></td>
+<td><center><h1>Slope Soaring Simulator</h3>
+<br>Copyright (C) 2003 Danny Chapman - danny@rowlhouse.freeserve.co.uk
+</tr>
+</table>
+
+
+</center>
+
+<h3>1. DESCRIPTION</h3>
+
+<p>This is a free, open source gliding simulator (mainly for
+radio-controlled slope-soaring gliders). 'Features' include:
+<ul>
+
+<li> Very realistic aerodynamics. I learnt to fly radio-controlled
+     gliders using this simulator!
+
+<li> Fly against "robot" pilots that attempt to stay aloft, chase you,
+  and fire missiles at you.
+
+<li> Race/combat/free-fly modes
+
+<li> Basic networking - currently between two simulations
+  (peer-peer).
+
+<li> Collisions between gliders and other objects (mainly each other,
+missiles and the ground).
+
+<li> Wind field is precalculated using a (3rd party) numerical
+  simulation of airflow over the terrain, or can be generated on the
+  fly (as can the terrain), including effects such as thermals and
+  boundary layers.
+
+<li> OpenGL is used for the 3D graphics. FMOD for 3D sound. 
+
+<li> Terrain is simplified using the Lindstrom/Pascucci (2001)
+  view-dependant level-of-detail algorithm with geo-morphing and
+  view-frustrum culling. This allows large and/or detailed terrains.
+
+<li> Quite a few things are modifiable at run-time via a GUI, and almost
+  everything is modifiable via text configuration files.
+
+<li> Compiles and runs under Windows, Linux and Solaris and Mac OS X.
+
+</ul>
+
+<h3>2. INSTALLATION:</h3>
+
+<ol>
+<li> Windows (pre-compiled version)
+<ol>
+<li> If this is on a CD, then things should run OK from
+   there. However, reading terrain data from the CD may be slow (at
+   least at first, before it gets paged into memory). It is probably
+   better to use Winzip to to put the contents of this CD onto a
+   hard-drive using sss_demo.zip.
+
+<li> Run sss.exe to have a slightly interactive startup, or one of
+    the .bat files (such as run_builtin_demo.bat) to use a specific
+    configuration.
+
+<li> By default sss.exe uses sss.cfg as a configuration
+     file. Edit sss.cfg (e.g. with notepad or wordpad) to change the
+     behaviour (obviously not possible if you're running direct from
+     a CD!).
+</ol>
+
+<li>Linux
+<ol>
+<li> Ensure that you have OpenGL (or Mesa) and GLUT
+   headers/libraries. Also GLUI, plib and FMOD (though you can tweak
+   the Makefile to build without these last 3).
+
+<li> Check that the Makefile looks OK, then build using make/gmake. It
+should place the executable, "sss", in the parent directory.
+
+<li> Edit sss.cfg (etc) if you want.
+
+<li> Run sss (which will have been put in the directory above the
+Makefile).
+</ol>
+</ol>
+
+<h3>3. RUNNING INSTRUCTIONS</h3>
+
+<p>Basically, if you have problems getting things to work, turn off
+the expensive-looking options in sss.cfg - in particular set the
+texture_level to 1. If things do work, on the other hand, and if
+you've got a decent computer, you can try "turning up" the parameters
+in sss.cfg. Many parameters can be modified by pressing 'c' when
+the program is running.
+
+<p>When you run it, you'll start in a paused mode - 'p' toggles pause.
+
+<p>To fly, the mouse acts like the top of a joystick - center it by
+moving the pointer to the center of the screen (when the plane is, if
+you're in the body view). The right mouse-button gives you an extra
+boost, for when things go wrong... If you have a joystick, it should
+work if you press 'j'. As a last resort, the arrow keys will work too
+(if you're in mouse mode - press 'm' if in doubt).
+
+<p> Keeping the glider up in the air involves staying in the region
+where air is being lifted up over the hill - press and hold 'w' for a
+few seconds to see some wind arrows (press 'W' to get rid of
+them). Try and keep to the region immediately in front of the starting
+location. It takes a while to get the hang of it!
+
+<p>For a full list of keys and their actions, press 'h' (for help).
+
+<h3>4. PROBLEMS</h3>
+
+I have done a lot of testing to make sure that this program is free
+from bugs - there may be a few behavioural bugs lurking, but having
+run it under Solaris and Windows using Purify I am confident that it
+does not produce any bad memory accesses etc. 
+
+However, if you do experience problems running it, please let me know.
+
+<h3>5. MULTIPLAYER</h3>
+
+<p>Multiplayer is still very much work-in-progress. To run it, you
+need to specify some extra options, and under Windows run it by hand
+from a command prompt:
+
+<p>sss [port to listen on] [ip-addr1] [port1]
+
+<p>It will use the default configuration file, sss.cfg.
+
+<p>Lets say you want to run the simulator on two computers, 135.96.54.24
+and 134.96.55.12:
+
+<p>on 135.96.54.24 use sss 10001 134.96.55.12 10002
+<p>on 134.96.55.12 use sss 10002 135.96.54.24 10001
+
+<p>When each instance of sss starts it will wait in an initialisation
+phase for connections from the other simulations. Only when it
+receives the expected connection will it start. Once it is running it
+won't accept any new connections.
+
+<p>You can tweak a couple of parameters in the sss.cfg file.
+
+<p><b>NOTE:</b> You need to have the same configuration files for each
+of the simulations. You can tweak some things (e.g. window size,
+graphics options etc), but nothing that really affects the simulation
+- e.g. terrain generation parameters etc. otherwise confusion will
+follow... This is work-in-progress, remember!
+
+<p> Thanks for taking the time to try it - Danny.  
+
+<p><center><a
+href="mailto:danny@rowlhouse.freeserve.co.uk">danny@rowlhouse.freeserve.co.uk</a>
+</center>

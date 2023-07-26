@@ -1,0 +1,535 @@
+Mass      0.932256E-01  (slug)
+I_xx      0.456257E-01  (slug-ft^2)
+I_yy      0.445163E-01  (slug-ft^2)
+I_zz      0.882453E-01  (slug-ft^2)
+I_xz      0.304607E-02  (slug-ft^2)
+C_ref     0.687500      reference chord  (ft)
+B_ref      4.00000      reference span   (ft)
+S_ref      2.75000      reference area   (ft^2)
+U_ref      39.3701      CD reference speed (ft/s)
+Alpha_0   0.122173E-01  baseline alpha_0  (rad)
+Cm_0      0.142156E-01  baseline Cm_0 at alpha_0
+CL_0      0.108991      baseline CL_0 at alpha_0
+CL_max     1.10000      upper stall limit CL
+CL_min   -0.600000      lower stall limit CL
+CD_prof   0.670000E-01  profile CD 
+Uexp_CD  -0.500000      CD Re-scaling exponent
+CL_a       4.81276      lift slope
+Cm_a     -0.298318      pitch stability
+CY_b     -0.816420      sideforce due to sideslip
+Cl_b     -0.240925E-01  roll due to sideslip
+Cn_b      0.148155      yaw stability
+CL_q       7.24396      lift due to pitch rate
+Cm_q      -10.2802      pitch damping
+CY_p      0.979000E-02  sideforce due to roll rate
+Cl_p     -0.462504      roll damping
+Cn_p     -0.138288E-01  yaw due to roll rate
+CY_r      0.333907      sideforce due to yaw rate
+Cl_r      0.460948E-01  roll due to yaw rate
+Cn_r     -0.157387      yaw damping
+CL_de     0.247220      lift due to elevator
+Cm_de    -0.621038      pitch due to elevator
+CY_dr     0.227490      sideforce due to rudder
+Cl_dr     0.188651E-01  roll due to rudder
+Cn_dr    -0.111666      yaw due to rudder
+CY_da    -0.276100E-01  sideforce due to aileron
+Cl_da     0.143837      roll due to aileron
+Cn_da     0.117119E-01  yaw due to aileron
+span_eff	 0.95		effective span
+CL_CD0		 0.0		set to as high as 0.30 for slow sections
+CD_CLsq		 0.01		deformation drag, as high as 0.02
+CD_AIsq		 0.0		drag due to aileron deflection
+CD_ELsq		 0.0		drag due to elevon deflection
+eta_loc	  0.30		eta_loc for stall model
+CG_arm	  0.75		CG_arm for stall model
+CL_drop	  0.0		CL drop during stall break
+CD_stall  0.15		CD during stall
+initial_altitude 0.55		Starting altitude of airplane in feet
+initial_velocity 0		Fast handlaunch
+initial_theta 	 0		Starting pitch of airplane in degrees
+max_thrust	2.75		Max thrust of 0.2 pounds
+gear		17		Wheels and hard points on the airplane
+ locations                      Locations of wheels/hard points relative to CG
+ 0.1916    2.0     0.0833
+ 0.1916   -2.0     0.0833
+-0.3500    2.0     0.0833 
+-0.350    -2.0     0.0833 
+ 0.8333    0.0     0.0 
+-0.08333   0.0    -0.25
+-0.08333   0.0     0.25
+ 0.41677   0.0     0.525
+-0.0833   -0.667   0.5 
+-0.0833    0.667   0.5   
+-0.0833    0.0    -0.25  
+-0.4166    0.0     0.25 
+-2.166     0.0     0.0  
+-1.875     0.6666  0.0 
+-1.875    -0.6666  0.0  
+-2.1666    0.6666  0.0 
+-2.1666   -0.6666  0.0  
+ springiness			lb/ft spring constant
+  65
+  65
+  65
+  65
+  65
+  65
+  65
+  65
+  65
+  65
+  65
+  65
+  65
+  65
+  65
+  65
+  65
+ damping			lb/ft/sec damping constant
+  0.25
+  0.25
+  0.25
+  0.25
+  0.25
+  0.25
+  0.25
+  0.25
+  0.25
+  0.25
+  0.25
+  0.25
+  0.25
+  0.25
+  0.25
+  0.25
+  0.25
+ braking			Percentage of max braking applied initially
+  0.5	
+  0.5	
+  0.5	
+  0.5	
+  0.5	
+  0.5
+  0.5
+  0.25
+  0.25
+  0.25	
+  0.5	
+  0.5	
+  0.5	
+  0.5
+  0.5
+  0.5
+  0.5
+ steerability	     Channel number and max wheel angle for max stick input
+  0	0
+  0	0
+  0	0
+  0	0
+  0	0
+  0	0
+  0	0
+  0	0
+  0	0
+  0	0
+  0	0
+  0	0
+  0	0
+  0	0
+  0	0
+  0	0
+  0	0
+end_gear          Obligatory comment to make sure the file is parsed correctly
+
+
+extrusion	5	wing
+ translate                      Translate entire wing
+  0 -0.0833 0.25
+ rotate                         Add 2 degree decalage
+  0 0 0
+ up_vector			Y axis of section corresponds in 3D
+  0 1 0
+ path				Coordinates of rib starting points XYZ
+  2.0  0       0.0
+  1.0  0       0.0
+   0   0       0.0
+  -1.0  0	0.0
+  -2.0  0	0.0
+ colors				Colors of each rib RGB
+   0.9 0.0 0.0
+   1.0 1.0 1.0
+   1.0 1.0 1.0
+   1.0 1.0 1.0
+   0.0 0.0 0.9
+scaling		To perform magnification, set elements 1,5=mag 3=xtranslation
+ 0.5416	  0	 0.0591	 0	0.5416	   0
+ 0.68745  0	 0.02955 0	0.68745	   0
+ 0.8333	  0	 0	 0	0.8333	   0
+ 0.68745  0	 0.02955 0	0.68745	   0
+ 0.5416	  0	 0.0591	 0	0.5416	   0 
+section		Airfoil section with 11 points, must start and end on same
+  16
+  1		0.0104
+  0.75		0.04166667
+  0.5208	0.0625
+  0.375		0.072916
+  0.25		0.067708
+  0.10416	0.05208
+  0.04166	0.03645
+  0		0	
+  0.04166	-0.03645
+  0.10416	-0.05208
+  0.25		-0.067708
+  0.375		-0.072916
+  0.5208	-0.062
+  0.75		-0.04166667
+  1		-0.0104
+  1.001		0.0104
+end_extrusion		This is the end of the wing extrusion
+
+
+extrusion 4 fuselage box
+ translate			Go to nose
+  0 0 0.66667
+ rotate				align to fuselage axis
+  0 90 0
+ up_vector			Y is still up
+  0 1 0
+ path				4 formers
+  0 0 0
+  0.41666 0 0
+  1.25 0 0
+  2.91 0 0
+ colors				White fuselage frame
+  1.0 1.0 1.0
+  1.0 1.0 1.0
+  1.0 1.0 1.0
+  1.0 1.0 1.0
+ scaling			Width and height changes of box
+  0.5 0 0 0 0.5 0
+  1.0 0 0 0 1.0 0
+  1.0 0 0 0 1.0 0
+  0.1 0 0 0 0.5 0
+ section			simple box shape
+  5
+  0.15 0.15
+  -0.15 0.15
+  -0.15 -0.15 
+  0.15 -0.15
+  0.151 0.15
+end_extrusion			done with fuselage box
+
+extrusion 2 turtle deck
+ translate			Go to nose
+  0 0.15 -0.416666
+ rotate				align to fuselage axis
+  -5 90 0
+ up_vector			Y is still up
+  0 1 0
+ path				4 formers
+  0 0 0
+  1.8333 0 0
+ colors				White fuselage frame
+  1.0 1.0 1.0
+  1.0 1.0 1.0
+ scaling			Width and height changes of box
+  0.12 0 0 0 0.18 0
+  0 0 0 0 0 0
+ section			simple circular shape
+  10
+  1.00 0
+  0.924 0.382
+  0.707 0.707
+  0.382 0.924
+  0 1.0 
+  -0.382 0.924
+  -0.707 0.707
+  -0.924 0.382
+  -1.00 0.0
+  1.001 0.00
+end_extrusion			done turtledeck
+
+
+extrusion 6 canopy
+ translate			Go to nose
+  0 0.15 -0.416666
+ rotate				align to fuselage axis
+  0 90 0
+ up_vector			Y is still up
+  0 1 0
+ path				4 formers
+  0.020 0 0
+  -0.1666 0 0
+  -0.333 0 0
+  -0.416 0 0
+  -0.5 0 0
+  -0.58333 0 0
+ colors				Black canopy
+  0.2 0.2 0.2
+  0.2 0.2 0.2
+  0.2 0.2 0.2
+  0.2 0.2 0.2
+  0.2 0.2 0.2
+  0.2 0.2 0.2
+ scaling			Width and height changes of box
+  0.122 0 0 0 0.183 0
+  0.132 0 0 0 0.198 0
+  0.12 0 0 0 0.18 0
+  0.096 0 0 0 0.144 0
+  0.06 0 0 0 0.09 0
+  0.0 0 0 0 0.0 0
+ section			simple circular shape
+  10
+  1.00 0
+  0.924 0.382
+  0.707 0.707
+  0.382 0.924
+  0 1.0 
+  -0.382 0.924
+  -0.707 0.707
+  -0.924 0.382
+  -1.00 0.0
+  1.001 0.00
+end_extrusion			done with canopy
+
+extrusion 4  nose spinner
+ translate		 Translate to the end of the fuselage pod
+ 0.00 0.0  0.83333  
+ rotate                  No rotation
+  0  90  0 
+ up_vector		Y is up
+  0 1 0
+ path			two sides of wheel
+  0.0 0 0
+  0.0416 0 0
+  0.0832 0 0
+  0.1664 0 0
+ colors               Color at each wheel end
+  0.1 0.1 0.1
+  0.1 0.1 0.1
+  0.1 0.1 0.1
+  0.1 0.1 0.1
+ scaling		Scale unit radius circle to desired size
+  0.0 0 0 0 0.0 0
+  0.03 0 0 0 0.03 0
+  0.06 0 0 0 0.06 0
+  0.083333 0 0 0 0.083333 0
+ section   Circle with 9 points around
+  9
+  1.0 0.000
+  0.707 0.707
+  0.0  1.0
+  -0.707 0.707
+  -1.0  0.0
+  -0.707 -0.707
+  0.0  -1.0
+  0.707 -0.707
+  1.001 0.000
+end_extrusion   This is the end of the nose spinner extrusion
+
+extrusion  3	tail
+ translate                      Translate entire wing
+  0 0 -1.666
+ rotate                         0 degree decalage
+  0 0 0
+ up_vector		Y axis of section corresponds to this direction
+  0 1 0
+ path			Horizontal Stab
+  0.666   0   0
+  0       0   0
+  -0.666  0   0
+colors			All red
+  0.9	0.0	0.0
+  0.9	0.0	0.0
+  0.9	0.0	0.0
+scaling			Single taper
+  0.63636  0      0.1666  0      0.63636     0
+  1.0      0      0       0      1.0         0
+  0.63636  0      0.1666  0      0.63636     0
+section                 7 point stab airfoil
+ 7
+ 0.458	0
+ 0.1516	0.01723
+ 0.0758  0.01206
+ 0	0
+ 0.0758  -0.01206
+ 0.1516	-0.01723
+ 0.458	0
+end_extrusion        End Stab
+
+
+extrusion  2	fin
+ translate                      Translate entire wing
+  0 0 -1.666
+ rotate                         0 degree decalage
+  0 0 0
+ up_vector		Y axis of section corresponds to this direction
+  1 0 0
+ path			Horizontal Stab
+  0   0       0
+  0   0.625   0
+colors			All white
+  0.9	0.0	0.0
+  0.9	0.0	0.0
+  0.9	0.0	0.0
+scaling			Single taper
+  1.0      0      0       0      1.0         0
+  0.63636  0      0.1666  0      0.63636     0
+section                 7 point stab airfoil
+ 7
+ 0.458	0
+ 0.1516	0.01723
+ 0.0758  0.01206
+ 0	0
+ 0.0758  -0.01206
+ 0.1516	-0.01723
+ 0.458	0
+end_extrusion        End Stab
+
+
+cylinder 6	left gear
+ translate		 Translate to the end of the fuselage pod
+ 0.667 -0.0833  -0.08333  
+ rotate                  No rotation
+  90  0  0 
+ dimension               Dimensions of pod 
+  0.0104   0.0104  0.3333
+grid			 Number of sample points radially and longitudinally
+  5 2
+color			 Yellow
+  0.2 0.2 0.2 1.0        
+end_cylinder		 End cylinder
+
+cylinder 6	left gear
+ translate		 Translate to the end of the fuselage pod
+ -0.667 -0.0833  -0.08333  
+ rotate                  No rotation
+  90  0  0 
+ dimension               Dimensions of pod 
+  0.0104   0.0104  0.3333
+grid			 Number of sample points radially and longitudinally
+  5 2
+color			 Yellow
+  0.2 0.2 0.2 1.0        
+end_cylinder		 End cylinder
+
+
+cylinder 7	front gear
+ translate		 Translate to the end of the fuselage pod
+ 0.04 -0.0833  0.41666  
+ rotate                  No rotation
+  90  0  0 
+ dimension               Dimensions of pod 
+  0.0104   0.0104  0.3541
+grid			 Number of sample points radially and longitudinally
+  5 2
+color			 Yellow
+  0.2 0.2 0.2 1.0        
+end_cylinder		 End cylinder
+
+
+extrusion 2  front wheel
+ translate		 Translate to the end of the fuselage pod
+ 0.00 -0.4374  0.41666  
+ rotate                  No rotation
+  0  0  0 
+ up_vector		Y is up
+  0 1 0
+ path			two sides of wheel
+  0.0416 0 0
+  -0.0416 0 0
+ colors               Color at each wheel end
+  0.1 0.1 0.1
+  0.1 0.1 0.1
+ scaling		Scale unit radius circle to desired size
+  0.08333 0 0 0 0.08333 0
+  0.08333 0 0 0 0.08333 0
+ section   Circle with 9 points around
+  9
+  1.0 0.000
+  0.707 0.707
+  0.0  1.0
+  -0.707 0.707
+  -1.0  0.0
+  -0.707 -0.707
+  0.0  -1.0
+  0.707 -0.707
+  1.001 0.000
+end_extrusion   This is the end of the wheel extrusion
+
+
+extrusion 2  left wheel
+ translate		 Translate to the end of the fuselage pod
+ 0.708 -0.4166  -0.08333
+ rotate                  No rotation
+  0  0  0 
+ up_vector		Y is up
+  0 1 0
+ path			two sides of wheel
+  0.0416 0 0
+  -0.0416 0 0
+ colors               Color at each wheel end
+  0.1 0.1 0.1
+  0.1 0.1 0.1
+ scaling		Scale unit radius circle to desired size
+  0.08333 0 0 0 0.08333 0
+  0.08333 0 0 0 0.08333 0
+ section   Circle with 9 points around
+  9
+  1.0 0.000
+  0.707 0.707
+  0.0  1.0
+  -0.707 0.707
+  -1.0  0.0
+  -0.707 -0.707
+  0.0  -1.0
+  0.707 -0.707
+  1.001 0.000
+end_extrusion   This is the end of the wheel extrusion
+
+
+extrusion 2  right wheel
+ translate		 Translate to the end of the fuselage pod
+ -0.708 -0.4166  -0.08333
+ rotate                  No rotation
+  0  0  0 
+ up_vector		Y is up
+  0 1 0
+ path			two sides of wheel
+  0.0416 0 0
+  -0.0416 0 0
+ colors               Color at each wheel end
+  0.1 0.1 0.1
+  0.1 0.1 0.1
+ scaling		Scale unit radius circle to desired size
+  0.08333 0 0 0 0.08333 0
+  0.08333 0 0 0 0.08333 0
+ section   Circle with 9 points around
+  9
+  1.0 0.000
+  0.707 0.707
+  0.0  1.0
+  -0.707 0.707
+  -1.0  0.0
+  -0.707 -0.707
+  0.0  -1.0
+  0.707 -0.707
+  1.001 0.000
+end_extrusion   This is the end of the wheel extrusion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,11 @@
+Slope Soaring Simulator (v2.16.7) - Copyright 2004 Danny Chapman
+SSS by Danny Chapman:
+    sss@rowlhouse.freeserve.co.uk
+SSS comes with ABSOLUTELY NO WARRANTY;
+This is free software, and you are welcome to redistribute it
+under certain conditions; see the GNU General Public License
+
+Can't open sss.cfg
+Can't open sss.cfg
+Assert success at E:\Danny\sss\sss-2.16.7\src\config.cpp:151
+Unable to open config file

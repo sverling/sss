@@ -1,0 +1,31 @@
+# general parameters
+
+##### This section contains general glider data ######
+
+mass      1.0 # glider mass
+I_x       0 # Moment of inertia about x
+I_y       0 # Moment of inertia about y
+I_z       0 # Moment of inertia about z
+
+aero_file      biplane2.air  # file containing the aerodynamic data
+structure_file biplane2.air  # file containing the structure data
+graphics_file  biplane2.air  # file containing the graphics data
+engine_file    glider_crrcsim_biplane2.dat  # file containing the engine data
+
+aero_type      crrcsim
+structure_type crrcsim
+graphics_type  crrcsim
+engine_type    default
+
+##### This section contains details concerning the aero, structure etc ####
+
+# Basic engine properties
+begin engine
+name engine
+# max min_force > max_force to flip the sense of the controlling channel
+min_force 0   # force in Newtons for when control is min
+max_force 22  # force in Newtons (mass * 10 * 2) for when control is max
+max_airspeed 50 # airspeed (m/s) at which the engine becomes useless
+control_per_chan_3 1 # indicates what channel is used for this engine
+end engine
+

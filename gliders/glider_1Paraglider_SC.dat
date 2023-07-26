@@ -1,0 +1,389 @@
+# Done by Esteban Ruiz on August 2006 - cerm78@gmail.com
+
+# This glider file describes a Paraglider using a Special Control
+# method.  This special control method is intended to simulate the
+# real life paraglider control method, in which the pilot has two
+# brakes and possibly and accelerator mechanism to control forward
+# speed, direction and rate of descend.
+
+# To fly this paraglider a four channel joystick is needed. The
+# controls are as follows:
+#  - To turn right you need to move the main stick to the right
+#    (channel 1). That will cause the right control surfaces to drop,
+#    causing more drag and less sustentation.
+#  - To turn left you need to move the rudder control to the left
+#    (channel 4). That will cause the left control surfaces to drop,
+#    causing more drag and less sustentation.
+#  - To increase the forward and downward speeds (acelerator system)
+#    you need to move the main stick forward (channel 2). That will
+#    cause all wing segments to decrease the angle of attack.
+#  - To decrease forward speed and increase a little downward speeds
+#    (brake system) you need to move the main stick to the right and
+#    the rudder control to the left (channels 1 and 4). That will
+#    cause both control surfaces to drop, causing more drag and less
+#    sustentation.
+#  - It is possible, but not a real life mechanism, to use the main
+#    stick to increase braking force with little sustentation loss,
+#    moving it backwards (channel 2). That will cause all wing
+#    segments to increase the angle of attack.
+#  - It is possible to use the throttle control (channel 3) to
+#    activate a virtual engine, to simulate a Paramotor
+
+# Moving the main stick to the left or the rudder control to the right
+# will cause the control surfaces to move upwards. That is impossible
+# to do with a real paraglider. Doing that increase drag and decrease
+# sustentation on the control surfaces to a extent that cause the
+# glider (sometimes) to enter a parachutal or full stall. In this
+# state the paraglider will fall without control at a fixed rate
+# (depending if it is parachuting or full stalled). To recover it's
+# possible to lightly apply both brakes (with tha main stick,
+# decelerator)
+
+# Another very important thing is that ROBOTS are not able to control
+# this glider configuration, due to the non standard use of the
+# joystick controls. That's why there are other paraglider definitions
+# that use a "normal" control mechanism.
+
+# The dimensions and flight characteristics are very close to the Sol
+# Prymus DHV1 Paraglider.
+
+##### This section contains general glider data ######
+
+mass      70
+I_x       100 	# Moment of inertia about x (eje ancho)
+I_y       100	# Moment of inertia about y (eje largo)
+I_z       100 	# Moment of inertia about z (eje alto)
+
+aero_file      glider_1Paraglider_SC.dat  # file containing the aerodynamic data
+structure_file glider_1Paraglider_SC.dat  # file containing the structure data
+graphics_file  glider_1Paraglider_SC.dat  # file containing the graphics data
+engine_file    glider_1Paraglider_SC.dat  # file containing the engine data
+
+aero_type      component
+structure_type component
+graphics_type  3ds
+engine_type    default
+
+3ds_file	Paraglider_B.3ds				# To use the BLUE paraglider file
+cull_backface true
+
+##### This section contains details concerning the aero, structure etc ####
+
+bounding_sphere_scale 0.3
+
+# Aerofoils are understood by aero, structure and graphics
+
+# Center wing segment
+begin aerofoil
+name segmento_central
+position_x      0		# Posición adelante y atrás
+position_y      0		# Posición lado a lado
+position_z      8.75	# Altura
+offset_forward  0.1		# Desplazamiento del eje X en vuelo
+offset_stalled  0.2		# Desplazamiento del eje X en pérdida
+offset_reverse  0.3		# Desplazamiento del eje X en vuelo reverso
+chord           2.65	# Distancia entre borde de ataque y de salida
+span            1.15	# Envergadura
+rotation        0		# Rotación sobre el eje x
+inc             -3		# Angulo de inclinación sobre el eje y
+CL_drop_scale   0		# Fuerza de superficies de control en pérdida (CL_drop_scale * CL_max)
+CL_rev_scale    0		# Fuerza de superficies de control en vuelo reverso (CL_rev_scale * CL_max)
+CL_per_alpha    0.01	# Fuerza de superficies de control respecto a alpha (unidades por grado)
+CL_0            0.6		# Fuerza de superficies de control con alpha = 0
+CL_max          1		# Máxima fuerza de superficies de control. Se entra en pérdida en CL_max / CL_per_alpha
+CL_min          0		# Mínima fuerza de superficies de control
+CD_prof         0.03	# Arrastre del perfil
+CD_induced_frac 0.03	# Arrastre inducido
+CD_max          10		# Arrastre del perfil con viento a 90 grados
+CM_0            0.01	# Tendencia al cabeceo con ángulo 0
+CL_per_deg      0.014	# Cambio en fuerza de superficies de control por cada grado de control
+CD_prof_per_deg 0		# Incremento en el arrastre del perfil por cada grado de control
+CM_per_deg      0		# Tendencia al cabeceo por cada grado de control
+inc_per_deg     1		# Porcentaje del ala que constituye superficie de control
+control_per_chan_2	11
+end aerofoil
+
+# First left wing segment
+begin aerofoil
+copy segmento_central
+name segmento_i1
+position_x      -0.02	# Posición adelante y atrás
+position_y      1.1		# Posición lado a lado
+position_z      8.7		# Altura
+chord           2.50	# Distancia entre borde de ataque y de salida
+rotation	-5			# Rotación sobre el eje x
+end aerofoil
+
+# First right wing segment
+begin aerofoil
+copy segmento_i1
+name segmento_d1
+position_y      -1.1	# Posición lado a lado
+rotation        5		# Rotación sobre el eje x
+end aerofoil
+
+# Second left wing segment
+begin aerofoil
+copy segmento_central
+name segmento_i2
+position_x      -0.04	# Posición adelante y atrás
+position_y      2.2		# Posición lado a lado
+position_z      8.52	# Altura
+chord           2.33	# Distancia entre borde de ataque y de salida
+span            1.2		# Envergadura
+# This segment is flat to increase lateral stability of the paraglider. Use commented value to obtain the "perfect shape"
+rotation        -0		#-14	# Rotación sobre el eje x
+end aerofoil
+
+# Second right wing segment
+begin aerofoil
+copy segmento_i2
+name segmento_d2
+position_y      -2.2	# Posición lado a lado
+# This segment is flat to increase lateral stability of the paraglider. Use commented value to obtain the "perfect shape"
+rotation        0		#14	# Rotación sobre el eje x
+end aerofoil
+
+# Third left wing segment
+begin aerofoil
+copy segmento_central
+name segmento_i3
+position_x      -0.06	# Posición adelante y atrás
+position_y      3.3		# Posición lado a lado
+position_z      8.09	# Altura
+chord           2.1		# Distancia entre borde de ataque y de salida
+span            1.25	# Envergadura
+rotation        -30		# Rotación sobre el eje x
+end aerofoil
+
+# third right wing segment
+begin aerofoil
+copy segmento_i3
+name segmento_d3
+position_y      -3.3	# Posición lado a lado
+rotation        30		# Rotación sobre el eje x
+end aerofoil
+
+# Fourth left wing segment
+begin aerofoil
+copy segmento_central
+name segmento_i4
+position_x      -0.15	# Posición adelante y atrás
+position_y      4.18	# Posición lado a lado
+position_z      7.38	# Altura
+chord           1.8		# Distancia entre borde de ataque y de salida
+span            1.1		# Envergadura
+rotation        -50		# Rotación sobre el eje x
+end aerofoil
+
+# Fourth right wing segment
+begin aerofoil
+copy segmento_i4
+name segmento_d4
+position_y      -4.18	# Posición lado a lado
+rotation        50		# Rotación sobre el eje x
+end aerofoil
+
+# Fifth left wing segment
+begin aerofoil
+copy segmento_central
+name segmento_i5
+position_x      -0.25	# Posición adelante y atrás
+position_y      4.6		# Posición lado a lado
+position_z      6.63	# Altura
+chord           1.2		# Distancia entre borde de ataque y de salida
+span            0.8		# Envergadura
+rotation        -78		# Rotación sobre el eje x
+end aerofoil
+
+# Fifth right wing segment
+begin aerofoil
+copy segmento_i5
+name segmento_d5
+position_y      -4.6	# Posición lado a lado
+rotation        78		# Rotación sobre el eje x
+end aerofoil
+
+# Center control segment
+begin aerofoil
+name control_central
+position_x      -1.48	# Posición adelante y atrás
+position_y      0		# Posición lado a lado
+position_z      8.82	# Altura
+offset_forward  0		# Desplazamiento del eje X en vuelo
+offset_stalled  0		# Desplazamiento del eje X en pérdida
+offset_reverse  0		# Desplazamiento del eje X en vuelo reverso
+chord           0.3		# Distancia entre borde de ataque y de salida
+span            1.15	# Envergadura
+rotation        0		# Rotación sobre el eje x
+inc             4		# Angulo de inclinación sobre el eje y
+CL_drop_scale   0.01	# Fuerza de superficies de control en pérdida (CL_drop_scale * CL_max)
+CL_rev_scale    0.01	# Fuerza de superficies de control en vuelo reverso (CL_rev_scale * CL_max)
+CL_per_alpha    0.01	# Fuerza de superficies de control respecto a alpha (unidades por grado)
+CL_0            0		# Fuerza de superficies de control con alpha = 0
+CL_max          1		# Máxima fuerza de superficies de control. Se entra en pérdida en CL_max / CL_per_alpha
+CL_min          0		# Mínima fuerza de superficies de control
+CD_prof         0		# Arrastre del perfil
+CD_induced_frac 0		# Arrastre inducido
+CD_max          1		# Arrastre del perfil con viento a 90 grados
+CM_0            0		# Tendencia al cabeceo con ángulo 0
+CL_per_deg      0.15	# Cambio en fuerza de superficies de control por cada grado de control
+CD_prof_per_deg 0.15	# Incremento en el arrastre del perfil por cada grado de control
+CM_per_deg      0		# Tendencia al cabeceo por cada grado de control
+inc_per_deg     1		# Porcentaje del ala que constituye superficie de control
+end aerofoil
+
+# First left control segment
+begin aerofoil
+copy control_central
+name control_i1
+position_x      -1.43	# Posición adelante y atrás
+position_y      1.1		# Posición lado a lado
+position_z      8.77	# Altura
+rotation        -5		# Rotación sobre el eje x
+control_per_chan_1	0
+control_per_chan_4	0
+end aerofoil
+
+# First right control segment
+begin aerofoil
+copy control_i1
+name control_d1
+position_y      -1.1	# Posición lado a lado
+rotation        5		# Rotación sobre el eje x
+control_per_chan_1	0
+control_per_chan_4	0
+end aerofoil
+
+# Second left control segment
+begin aerofoil
+copy control_central
+name control_i2
+position_x      -1.37	# Posición adelante y atrás
+position_y      2.21	# Posición lado a lado
+position_z      8.58	# Altura
+span            1.2		# Envergadura
+rotation        -14		# Rotación sobre el eje x
+control_per_chan_1	0
+control_per_chan_4	-5
+end aerofoil
+
+# Second right control segment
+begin aerofoil
+copy control_i2
+name control_d2
+position_y      -2.21	# Posición lado a lado
+rotation        14		# Rotación sobre el eje x
+control_per_chan_1	5
+control_per_chan_4	0
+end aerofoil
+
+# Third left control segment
+begin aerofoil
+copy control_central
+name control_i3
+position_x      -1.28	# Posición adelante y atrás
+position_y      3.34	# Posición lado a lado
+position_z      8.13	# Altura
+span            1.25	# Envergadura
+rotation        -30		# Rotación sobre el eje x
+control_per_chan_1	0
+control_per_chan_4	-10
+end aerofoil
+
+# Third right control segment
+begin aerofoil
+copy control_i3
+name control_d3
+position_y      -3.34	# Posición lado a lado
+rotation        30		# Rotación sobre el eje x
+control_per_chan_1	10
+control_per_chan_4	0
+end aerofoil
+
+# Fourth left control segment
+begin aerofoil
+copy control_central
+name control_i4
+position_x      -1.22	# Posición adelante y atrás
+position_y      4.22	# Posición lado a lado
+position_z      7.4		# Altura
+span            1.1		# Envergadura
+rotation        -50		# Rotación sobre el eje x
+control_per_chan_1	0
+control_per_chan_4	-20
+end aerofoil
+
+# Fourth right control segment
+begin aerofoil
+copy control_i4
+name control_d4
+position_y      -4.22	# Posición lado a lado
+rotation        50		# Rotación sobre el eje x
+control_per_chan_1	20
+control_per_chan_4	0
+end aerofoil
+
+# Fifth left control segment
+begin aerofoil
+copy control_central
+name control_i5
+position_x      -1.02	# Posición adelante y atrás
+position_y      4.62	# Posición lado a lado
+position_z      6.63	# Altura
+span            0.8		# Envergadura
+rotation        -78		# Rotación sobre el eje x
+control_per_chan_1	0
+control_per_chan_4	-25
+end aerofoil
+
+# Fifth right control segment
+begin aerofoil
+copy control_i5
+name control_d5
+position_y      -4.62	# Posición lado a lado
+rotation        78		# Rotación sobre el eje x
+control_per_chan_1	25
+control_per_chan_4	0
+end aerofoil
+
+# Fuselage is constituited by two "disks" that define the head and
+# feet positions, just to aproximately simulate body position
+begin fuselage
+name fuselage
+segment 0.4 	0 	-0.6 	0		#  feet disk x, y, z and radius
+segment 0.6 	0 	-0.6 	0.3		#  feet disk x, y, z and radius
+segment 0.8 	0 	-0.6 	0		#  feet disk x, y, z and radius
+
+segment -0.5 	0 	0 	0			#  head x, y, z and radius
+segment -0.3 	0 	0 	0.3			#  head x, y, z and radius
+segment 0 	0 	0 	0				#  head x, y, z and radius
+end fuselage
+
+# Paramotor engine definition
+begin engine
+name engine
+min_force		0
+max_force		300
+max_airspeed	100
+bidirectional	false				# No reverse trust
+control_per_chan_3 1
+do_smoke		false				# Paramotors don's smoke... right?
+end engine
+
+# VARIOMETER SETTINGS - Added by Esteban Ruiz on August 2006 - These
+# settings override the SSS.CFG and default settings
+
+vario_enabled			true				# It's a general setting, it is ignored in the glider file
+vario_main_glider_only	false				# It's a general setting, it is ignored in the glider file
+vario_location			eye					# Set the main glider variometer location to be into glider/eye
+vario_audio_file		vario_beep.wav		# Uses this wav file to get the vario beeping
+vario_volume			1					# Sets the variometer volume to vario_volume
+vario_speed_var			0.5					# Variometer frequency will be updated if speed variation is of vario_speed_var or -vario_speed_var ms
+vario_dz_max			0.3					# Variometer will set volume to vario_dz_vol if between vario_dz_min and vario_dz_max ms
+vario_dz_min			-1					# Variometer will set volume to vario_dz_vol if between vario_dz_min and vario_dz_max ms
+vario_dz_vol			0.5					# Variometer will set volume to vario_dz_vol if between vario_dz_min and vario_dz_max ms
+vario_max_speed			10					# Beeping frequency will be updated only if less than vario_max_speed ms
+vario_min_speed			-10					# Beeping frequency will be updated only if more than vario_min_speed ms
+vario_rate_base			0.98				# This is the vario_audio_file base frequency
+vario_speed_div			15					# The current vertical speed will be divided by this number to get a fraction to sum or subtract from the vario_rate_base. The bigger this number, the least influenced is the frequency by vertical speed change

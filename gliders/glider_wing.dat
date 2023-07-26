@@ -1,0 +1,113 @@
+# general parameters for a wing
+
+##### This section contains general glider data ######
+
+mass  0.9   #  glider mass
+I_x   0.03  #  Moment of inertia about x
+I_y   0.06  #  Moment of inertia about y
+I_z   0.04  #  Moment of inertia about z
+
+aero_file      glider_wing.dat  # file containing the aerodynamic data
+structure_file glider_wing.dat  # file containing the structure data
+graphics_file  glider_wing.dat  # file containing the graphics data
+engine_file    glider_wing.dat  # file containing the engine data
+
+aero_type      component
+structure_type component
+graphics_type  component
+engine_type    default
+
+##### This section contains details concerning the aero, structure etc ####
+
+# Basic engine properties
+begin engine
+name engine
+# max min_force > max_force to flip the sense of the controlling channel
+min_force 0   # force in Newtons for when control is min
+max_force 20  # force in Newtons (mass * 10 * 2) for when control is max
+max_airspeed 50 # airspeed (m/s) at which the engine becomes useless
+control_per_chan_3 1 # indicates what channel is used for this engine
+end engine
+
+# Aerofoils are understood by aero, structure and graphics
+
+begin aerofoil
+name wing_left # Start of wing_mid params
+num_sections 3
+position_x       -0.16   # central x location
+position_y        0.35   # central y location
+position_z        0      # central z location
+offset_forward    0.1    # x offset when flying forward
+offset_stalled    0      # x offset when stalled
+offset_reverse   -0.1    # x offset when flying in reverse
+chord             0.4    # distance from leading to trailing edge
+span              0.7    # total span of aerofoil segment
+rotation          0      # Rot about x-axis (+ve for dihedral on left)
+inc               0      # Angle of inclination, after rotation above
+CL_drop_scale     0.6    # CL drops to this fraction of CL_max at stall
+CL_rev_scale      0.7    # CL is scaled by this when flying in reverse
+CL_per_alpha      0.075  # CL change with alpha in units per deg
+CL_0              0.0    # CL at alpha = 0: +ve for a wing aerofoil
+CL_max            1.4    # CL_max : stall at CL_max / CL_per_alpha
+CL_min           -1.4    # CL_min
+CD_prof           0.005  # profile drag
+CD_induced_frac   0.02   # so that CD_induced = CL * CL * CD_induced_frac
+CD_max            3  CD  # for when wind hits this aerofoil at 90 deg
+CM_0              0.006  # Pitching moment when alpha = 0
+CL_per_deg        0.02   # change in CL (of whole graph) with control 
+CD_prof_per_deg   0.005  # increase in CD_prof with control
+CM_per_deg       -0.01   # Pitching moment (about 1/4 chord) with control 
+inc_per_deg       0.1    # effective rotation of aerofoil with control
+control_per_chan_1   12      # control per joystick x
+control_per_chan_2  -10      # control per joystick y
+end aerofoil
+
+begin aerofoil
+copy wing_left
+name wing_right
+position_y     -0.35 
+control_per_chan_1 -12
+end aerofoil
+
+begin aerofoil
+copy wing_left
+name fin_left
+position_x           -0.3
+position_y            0.5
+position_z            0.05
+offset_forward        0.05 
+offset_stalled        0
+offset_reverse       -0.05
+chord                 0.2
+span                  0.14
+rotation             90
+inc                   0
+CL_per_alpha          0.1
+CL_0                  0.0
+CL_max                1.8
+CL_min               -1.8
+CL_per_deg            0.02
+inc_per_deg           0.1
+control_per_jx        0
+control_per_jy        0
+end aerofoil
+
+begin aerofoil
+copy fin_left
+name fin_right
+position_y -0.5 
+end aerofoil
+
+begin fusalage
+name fusalage
+segment -0.4  0 0 0.00  #  Tail x, y, z and radius
+segment -0.2  0 0 0.03  #  x, y, z, r
+segment  0.02 0 0 0.035 #  x, y, z, r
+segment  0.15 0 0 0.00  #  x, y, z, r
+end fusalage
+
+
+
+
+
+

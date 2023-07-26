@@ -1,0 +1,146 @@
+# general parameters for a fairly fast glider
+
+##### This section contains general glider data ######
+
+mass  1.8  # glider mass
+I_x   0.4 # Moment of inertia about x
+I_y   0.15 # Moment of inertia about y
+I_z   0.5 # Moment of inertia about z
+
+aero_file      glider_v.dat  # file containing the aerodynamic data
+structure_file glider_v.dat  # file containing the structure data
+graphics_file  glider_v.dat  # file containing the graphics data
+engine_file    glider_v.dat  # file containing the engine data
+
+aero_type      component
+structure_type component
+graphics_type  component
+engine_type    default
+
+##### This section contains details concerning the aero, structure etc ####
+
+# Basic engine properties
+begin engine
+name engine
+# max min_force > max_force to flip the sense of the controlling channel
+min_force 0   # force in Newtons for when control is min
+max_force 75  # force in Newtons (mass * 10 * 2) for when control is max
+max_airspeed 70 # airspeed (m/s) at which the engine becomes useless
+control_per_chan_3 1 # indicates what channel is used for this engine
+end engine
+
+# Aerofoils are understood by aero, structure and graphics
+
+begin aerofoil
+name wing_mid_left
+position_x     -0.08    # central x location
+position_y      0.425     # central y location
+position_z      0.0     # central z location
+offset_forward  0.08    # x offset when flying forward
+offset_stalled  0       # x offset when stalled
+offset_reverse -0.08    # x offset when flying in reverse
+chord            0.25    # distance from leading to trailing edge
+span             0.85    # total span of aerofoil segment
+rotation         0      # Rot about x-axis (+ve for dihedral on left)
+inc              1      # Angle of inclination, after rotation above
+CL_drop_scale    0.4    # CL drops to this fraction of CL_max at stall
+CL_rev_scale     0.7    # CL is scaled by this when flying in reverse
+CL_per_alpha     0.075  # CL change with alpha in units per deg
+CL_0             0.2    # CL at alpha = 0: +ve for a wing aerofoil
+CL_max           1.4    # CL_max : stall at CL_max / CL_per_alpha
+CL_min          -1.0    # CL_min
+CD_prof          0.02   # profile drag
+CD_induced_frac  0.04   # so that CD_induced = CL * CL * CD_induced_frac
+CD_max           3.0    # CD for when wind hits this aerofoil at 90 deg
+CM_0             0.00   # Pitching moment when alpha = 0
+CL_per_deg       0.02   # change in CL (of whole graph) with control 
+CD_prof_per_deg  0.005  # increase in CD_prof with control
+CM_per_deg      -0.01   # Pitching moment (about 1/4 chord) with control 
+inc_per_deg      0.15    # effective rotation of aerofoil with control
+control_per_chan_1   0      # control per joystick x
+control_per_chan_2   5      # control per joystick y
+end aerofoil
+
+begin aerofoil
+copy wing_mid_left
+name wing_mid_right
+position_y      -0.425     # central y location
+end aerofoil
+
+begin aerofoil
+copy wing_mid_left  # copy central section
+name wing_left # left wing tip
+position_y      1.03
+position_z      0.065
+span            0.4
+rotation       20.0
+control_per_chan_1 22.0
+control_per_chan_2   0      # control per joystick y
+end aerofoil
+
+begin aerofoil
+copy wing_left  # copy of left wing tip
+name wing_right
+position_y      -1.03
+position_z       0.065
+rotation       -20
+control_per_chan_1 -22
+control_per_chan_2   0      # control per joystick y
+end aerofoil
+
+# all-moving v-tail
+
+begin aerofoil
+copy wing_mid_left 
+name tail_left  # left part of V tail
+position_x      -0.925
+position_y       0.142
+position_z       0.142
+offset_forward   0.05
+offset_stalled   0
+offset_reverse  -0.05
+chord            0.15
+span             0.4
+rotation        45
+inc              0
+CL_per_alpha     0.05
+CL_0             0.0
+CL_max           1.4
+CL_min          -1.4
+CL_per_deg       0.00
+CD_prof_per_deg  0.00  # increase in CD_prof with control
+inc_per_deg      1.0
+control_per_chan_1 -5
+control_per_chan_2 -6
+control_per_chan_4 -7
+end aerofoil
+
+begin aerofoil
+copy tail_left
+name tail_right
+position_x    	-0.9
+position_y    	-0.142
+position_z    	 0.142
+rotation       -45 
+control_per_chan_1  5
+control_per_chan_2 -6
+control_per_chan_4  7
+end aerofoil
+
+# fusalage is understood by structure and graphics
+
+begin fusalage #   Main fusalage - must be parallel to x-axis
+name  fusalage
+segment -1.0 0 0 0.00  #  Tail x, y, z and radius
+segment -1.0 0 0 0.02  #  Tail x, y, z and radius
+segment  0.0 0 0 0.04  #  x, y, z, r
+segment  0.3 0 0 0.04  #  x, y, z, r
+segment  0.45 0 0 0.00  #  x, y, z, r
+end fusalage
+
+
+
+
+
+
+

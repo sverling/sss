@@ -1,0 +1,211 @@
+<html>
+<head>
+<title>About the Slope Soaring Simulator source code.</title>
+</head>
+<body bgcolor="#ffffff">
+
+<h3>Introduction</h3>
+
+<p>I hope that you're reading this because you've run the simulator
+and are interested in the nitty-gritty details of how it's been
+implemented. Consequently, I also want to point out some of the areas
+that I can imagine being improved (before you do!) - encountering
+these issues has taught me a lot.
+
+<p>The history of this project is that it started out as a brief
+experimentation with OpenGL (with a laptop during a camping holiday in
+France!). I've always had an interest in numerical simulations, and I
+wanted to be able to visualise some of the things I'd been thinking
+about. I was also intrigued as to how well aircraft could be
+represented a collection of independent aerofoils. Subsequent
+development has been continuous and incremental, and on the way I have
+learned more than I ever though I would about rendering, aerodynamics,
+physics simulations, and general programming/game design. One of the
+things I've learnt is that this simulator does pretty well all of
+these things "wrong"! Even though it has been my sand-pit for
+experimenting, I think that the end result works well - it certainly
+does more than I ever thought it would.
+
+<p>Now I know what I have done wrong, I also have many ideas about how
+to do things better. What follows is a critical discussion of some of
+these issues.
+
+<h3>Physics</h3>
+<ul>
+
+<li> The integration of the equations of motion is shared between the
+     physics module and each object. Whilst this was not initially a
+     problem (when I thought that the glider would be the only object)
+     it now results in a certain amount of code duplication. It also
+     means that it is not practical to go beyond 2nd order Range-Kutta
+     integration (actually I use a slightly modified 2nd order scheme
+     that is a little more accurate).
+
+		 <p>Having said that, from a pragmatic point of view I'm not sure
+		 that the simulation necessarily <it>needs</it> to go beyond a 2nd
+		 order scheme. What would be more useful is an adaptive
+		 time-stepping scheme where different objects use different
+		 time-steps. This would let me run many more robots on my slow
+		 computer! Nevertheless, the current organisation is limiting - it
+		 would make it hard to introduce other types of bodies into the
+		 simulation.
+
+<li> Collision is done using a spring/mass model. This is actually
+     perfectly good for the vast majority of the time - it's a flight
+     simulator so objects are mostly flying! However, ground
+     interaction and mid-air collisions could be better. I am very
+     interested in re-writing this aspect in terms of non-penetrating
+     rigid bodies. I even think it might be fun!
+
+</ul>
+
+<h3>Graphics</h3>
+
+<ul>
+
+<li> The graphics rendering is rather distributed at the moment - with
+     no real coordination between objects as regards texture usage,
+     OpenGL state and so-on. There is room for a lot of improvement
+     here.
+
+<li> I became very interested in CLOD terrain rendering
+     algorithms - the terrain plays a significant role in the overall
+     feel of the simulator, and is also a potentially large drain on
+     the CPU. There are three aspects that would be interesting to
+     improve:
+		 <ol>
+		 <li> Using a separate terrain-simplification thread that
+          calculates the terrain triangle strip(s), but does not
+          render them. Each strip could last several frames. This
+          would allow multiple terrain rendering passes, and would
+          also prevent glitches when new terrain needs to be paged in
+          from file.
+     <li> Using separate tiles for the terrain. This would allow more
+          sensible terrain storage on disk, including having large
+          terrains that are not square. It would also mean that
+          textures do not have to be so spread out.
+     <li> The terrain needs to provide height information for
+          collision detection and wind-field calculation. There's room
+          for improvement here, especially in terms of reducing the
+          memory usage (and hopefully improving cache usage).
+     </ol>
+
+<li> There is probably a case for avoiding any CLOD algorithm - a
+     reasonably recent CPU/GPU could probably cope with rendering
+     quite large terrains (larger than I tend to use) quicker by
+     storing all the information on the graphics card itself. However,
+     it would limit support for older machines.
+
+<li> There is quite a lot of scope for more flashy graphics - particle
+     effects for explosions, a decent animated cloud layer, texture
+     splatting of detail onto the terrain etc. To do this the
+     rendering structure needs to be tidied up, so that there is a
+     central render-manager that allows components to register
+     themselves for pre-render work (e.g. calculating shadow
+     textures), normal rendering, transparent rendering (with
+     sorting), and overlays.
+
+</ul>
+
+<h3>Robot glider AI</h3>
+
+<ul>
+
+<li> Flying a glider from point A to B in a straight line (without
+     getting blown down-wind etc) is not trivial. Deciding on exactly
+     where the robot should fly to (and the path to reach it) is very
+     hard, at least for a robot glider that (a) can only use updrafts
+     to keep flying and (b) is trying to chase another glider without
+     crashing.
+
+<li> Currently the robots use some simple heuristics to choose where
+		 to fly, largely based on the idea that "if the human wants to fly
+		 here, then there's probably enough lift to keep me aloft too". To
+		 do this properly, and to take things further, the robot AI should
+		 be implemented as a formal state machine incorporating desires on
+		 different time-scales - e.g. "Chase glider X for the next 30
+		 seconds" at the same time as "avoid this hill that is coming
+		 towards me rather quickly". It also needs to be able to "predict"
+		 where lift is likely to be - preferably without cheating(!) - and
+		 plan a path from A to B that takes it through regions of
+		 sufficient lift.
+
+<li> The robot AI is potentially a very interesting topic, largely
+		 because of the constraints imposed by the nature of the
+		 simulation. It has also taught me that "cheating" can be very
+		 effective - the robots come across as being much clever than they
+		 really are!
+
+</ul>
+
+<h3>Networking</h3>
+<ul>
+
+<li> Making a true multi-player version would be a significant, and
+     interesting, step. Due to the symmetric interactions between the
+     objects (i.e. glider-glider collisions) a peer-peer version of
+     this simulation will always have problems, and would not scale
+     well to many players.
+
+<li> A client-server model is my favoured approach. However, each
+     client will be very sensitive to conflicts with the server, so
+     there would have to be a means where client/server conflicts were
+     generally resolved in favour of the client, in those cases where
+     other clients were not involved. In the case of collisions
+     between gliders on two different clients, slight glitches in the
+     client representation would be acceptable, given the violent
+     nature of such events.
+
+<li> The lag/jitter correction algorithms currently in place could
+     probably be improved and simplified - they are certainly needed
+     for combat-style flying against remote opponents. Typical
+     internet lag would make an opponent be out of place by a distance
+     much larger than the size of a glider.
+
+<li> The current networking layer is slightly odd because it started
+     life as a very different design...!
+
+<li> The issue of using compatable configuration on the different
+     machines needs to be addressed. It would be possible to serialise
+     all the configuration, and make each client download it from the
+     server. However, this would not be practical for some aspects
+     (textures and models) - where local copies would be needed (could
+     be checked using checksums).
+
+</ul>
+
+<h3>General structure</h3>
+<ul>
+<li> Ownership of some of the objects is a little murky - there needs
+     to be a central game object that maintains a database of all the
+     objects in a generic sense and does general book-keeping. There
+     is currently too much "juggling" where objects rely on details of
+     other objects' behaviour. I intend to do the very substantial job
+     of tidying up these relationships, as part of the
+     physics/networking development I have planned.
+
+<li> Configuration is a mixture of being good (the Config_file class
+     works well) and not so good (Config has turned into a
+     monster!). Now that there is a race mode, I can see room for more
+     supporting scripted behaviour - e.g. of the robot AI.
+
+<li> A clean division of the code between graphical and non-graphical
+     parts would have the added benefit that the non-graphical part
+     (including the physics engine) could be re-used as a stand-alone
+     server (I already have offers of hosts!).
+
+<li> The current implementation makes it difficult to remove some
+     components (e.g. the terrain) and replace them with a substitute
+     (i.e. a different terrain) at run-time.
+
+<li> The general user-interface deserves more work.
+
+</ul>
+
+<p> So, I have been learning all the time whilst working on this
+project. I know that whatever I do next, with this or a different
+project, I will build on what I have learnt, and there will be a whole
+host of new, exciting things to find out about!
+
+</html>
+

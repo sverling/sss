@@ -1,0 +1,266 @@
+# Done by Esteban Ruiz on August 2006 - cerm78@gmail.com 
+
+# This glider file describes a Paraglider using a "Normal" Control
+# method.
+
+# This normal control method is intended to allow the SSS robots to
+# control a paraglider using the standard control distribution. For
+# that effect, some aditional control surfaces have been added that
+# are not compliant with the real flight model. Even thought, this
+# normal control paraglider behaves fairly well.
+
+# To fly this paraglider a two channel joystick is needed. The
+# controls are as follows:
+#  - To turn right you need to move the main stick to the right
+#    (channel 1). That will cause the control surfaces to move the
+#    glider nose to the right, causing a right turn.
+#  - To turn left you need to move the main stick to the left (channel
+#    1). That will cause the control sirfaces to move the glider nose
+#    to the left, causing a left turn.
+#  - To increase the forward and downward speeds (acelerator system)
+#    you need to move the main stick forward (channel 2). That will
+#    cause the control surfaces to move the glider nose downwards,
+#    causing a slight dive.
+#  - To decrease forward speed and increase a little downward speeds
+#    (brake system) you need to move the main stick backwards (channel
+#    2). That will cause the control surfaces to move the glider nose
+#    upwards.
+#  - It is possible to use the throttle control (channel 3) to
+#    activate a virtual engine, to simulate a Paramotor
+
+# This control model is not the real life control model so the flight
+# characteristics are a little far from the truth.  Besides that, the
+# dimensions are very close to the Sol Prymus DHV1 Paraglider.
+
+##### This section contains general glider data ######
+
+mass      70
+I_x       100 	# Moment of inertia about x (eje ancho)
+I_y       100	# Moment of inertia about y (eje largo)
+I_z       100 	# Moment of inertia about z (eje alto)
+
+aero_file      glider_1Paraglider_NC.dat  # file containing the aerodynamic data
+structure_file glider_1Paraglider_NC.dat  # file containing the structure data
+graphics_file  glider_1Paraglider_NC.dat  # file containing the graphics data
+engine_file    glider_1Paraglider_NC.dat  # file containing the engine data
+
+aero_type      component
+structure_type component
+graphics_type  3ds
+engine_type    default
+
+3ds_file	Paraglider_B.3ds				# To use the BLUE paraglider file
+cull_backface true
+
+##### This section contains details concerning the aero, structure etc ####
+
+bounding_sphere_scale 0.3
+
+# Aerofoils are understood by aero, structure and graphics
+
+# Center wing segment
+begin aerofoil
+name segmento_central
+position_x      0		# Posición adelante y atrás
+position_y      0		# Posición lado a lado
+position_z      8.75	# Altura
+offset_forward  0.1		# Desplazamiento del eje X en vuelo
+offset_stalled  0.5		# Desplazamiento del eje X en pérdida
+offset_reverse  1		# Desplazamiento del eje X en vuelo reverso
+chord           2.65	# Distancia entre borde de ataque y de salida
+span            1.15	# Envergadura
+rotation        0		# Rotación sobre el eje x
+inc             -4		# Angulo de inclinación sobre el eje y
+CL_drop_scale   0.01	# Fuerza de superficies de control en pérdida (CL_drop_scale * CL_max)
+CL_rev_scale    0.01	# Fuerza de superficies de control en vuelo reverso (CL_rev_scale * CL_max)
+CL_per_alpha    0.01	# Fuerza de superficies de control respecto a alpha (unidades por grado)
+CL_0            0.6		# Fuerza de superficies de control con alpha = 0
+CL_max          1		# Máxima fuerza de superficies de control. Se entra en pérdida en CL_max / CL_per_alpha
+CL_min          0		# Mínima fuerza de superficies de control
+CD_prof         0.05	# Arrastre del perfil
+CD_induced_frac 0.032	# Arrastre inducido
+CD_max          10		# Arrastre del perfil con viento a 90 grados
+CM_0            0.01	# Tendencia al cabeceo con ángulo 0
+CL_per_deg      0.02	# Cambio en fuerza de superficies de control por cada grado de control
+CD_prof_per_deg 0.05	# Incremento en el arrastre del perfil por cada grado de control
+CM_per_deg      0		# Tendencia al cabeceo por cada grado de control
+inc_per_deg     0.05	# Porcentaje del ala que constituye superficie de control
+end aerofoil
+
+# First left wing segment
+begin aerofoil
+copy segmento_central
+name segmento_i1
+position_x      -0.02	# Posición adelante y atrás
+position_y      1.1		# Posición lado a lado
+position_z      8.7		# Altura
+chord           2.50	# Distancia entre borde de ataque y de salida
+rotation	-5			# Rotación sobre el eje x
+end aerofoil
+
+# First right wing segment
+begin aerofoil
+copy segmento_i1
+name segmento_d1
+position_y      -1.1	# Posición lado a lado
+rotation        5		# Rotación sobre el eje x
+end aerofoil
+
+# Second left wing segment
+begin aerofoil
+copy segmento_central
+name segmento_i2
+position_x      -0.04	# Posición adelante y atrás
+position_y      2.2		# Posición lado a lado
+position_z      8.52	# Altura
+chord           2.33	# Distancia entre borde de ataque y de salida
+span            1.2		# Envergadura
+# This segment is flat to increase lateral stability of the paraglider. Use commented value to obtain the "perfect shape"
+rotation        -0		#-14	# Rotación sobre el eje x
+end aerofoil
+
+# Second right wing segment
+begin aerofoil
+copy segmento_i2
+name segmento_d2
+position_y      -2.2	# Posición lado a lado
+# This segment is flat to increase lateral stability of the paraglider. Use commented value to obtain the "perfect shape"
+rotation        0		#14	# Rotación sobre el eje x
+end aerofoil
+
+# Third left wing segment
+begin aerofoil
+copy segmento_central
+name segmento_i3
+position_x      -0.06	# Posición adelante y atrás
+position_y      3.3		# Posición lado a lado
+position_z      8.09	# Altura
+chord           2.1		# Distancia entre borde de ataque y de salida
+span            1.25	# Envergadura
+rotation        -30		# Rotación sobre el eje x
+end aerofoil
+
+# third right wing segment
+begin aerofoil
+copy segmento_i3
+name segmento_d3
+position_y      -3.3	# Posición lado a lado
+rotation        30		# Rotación sobre el eje x
+end aerofoil
+
+# Fourth left wing segment
+begin aerofoil
+copy segmento_central
+name segmento_i4
+position_x      -0.15	# Posición adelante y atrás
+position_y      4.18	# Posición lado a lado
+position_z      7.38	# Altura
+chord           1.8		# Distancia entre borde de ataque y de salida
+span            1.1		# Envergadura
+rotation        -50		# Rotación sobre el eje x
+end aerofoil
+
+# Fourth right wing segment
+begin aerofoil
+copy segmento_i4
+name segmento_d4
+position_y      -4.18	# Posición lado a lado
+rotation        50		# Rotación sobre el eje x
+end aerofoil
+
+# Fifth left wing segment
+begin aerofoil
+copy segmento_central
+name segmento_i5
+position_x      -0.25	# Posición adelante y atrás
+position_y      4.6		# Posición lado a lado
+position_z      6.63	# Altura
+chord           1.2		# Distancia entre borde de ataque y de salida
+span            0.8		# Envergadura
+rotation        -78		# Rotación sobre el eje x
+end aerofoil
+
+# Fifth right wing segment
+begin aerofoil
+copy segmento_i5
+name segmento_d5
+position_y      -4.6	# Posición lado a lado
+rotation        78		# Rotación sobre el eje x
+end aerofoil
+
+# Center Control segment
+begin aerofoil
+name control_c
+position_x      2		# Posición adelante y atrás
+position_y      0		# Posición lado a lado
+position_z      2		# Altura
+offset_forward  0		# Desplazamiento del eje X en vuelo
+offset_stalled  0		# Desplazamiento del eje X en pérdida
+offset_reverse  0		# Desplazamiento del eje X en vuelo reverso
+chord           0.6		# Distancia entre borde de ataque y de salida
+span            1		# Envergadura
+rotation        0		# Rotación sobre el eje x
+inc             0		# Angulo de inclinación sobre el eje y
+CL_drop_scale   0.01	# Fuerza de superficies de control en pérdida (CL_drop_scale * CL_max)
+CL_rev_scale    0.01	# Fuerza de superficies de control en vuelo reverso (CL_rev_scale * CL_max)
+CL_per_alpha    0.01	# Fuerza de superficies de control respecto a alpha (unidades por grado)
+CL_0            0		# Fuerza de superficies de control con alpha = 0
+CL_max          1		# Máxima fuerza de superficies de control. Se entra en pérdida en CL_max / CL_per_alpha
+CL_min          0		# Mínima fuerza de superficies de control
+CD_prof         0		# Arrastre del perfil
+CD_induced_frac 0		# Arrastre inducido
+CD_max          0		# Arrastre del perfil con viento a 90 grados
+CM_0            0		# Tendencia al cabeceo con ángulo 0
+CL_per_deg      0.08	# Cambio en fuerza de superficies de control por cada grado de control
+CD_prof_per_deg 0		# Incremento en el arrastre del perfil por cada grado de control
+CM_per_deg      0		# Tendencia al cabeceo por cada grado de control
+inc_per_deg     0.9		# Porcentaje del ala que constituye superficie de control
+control_per_chan_1	0
+control_per_chan_2	20
+end aerofoil
+
+# Left Control segment
+begin aerofoil
+copy control_c
+name control_i
+position_x      2		# Posición adelante y atrás
+position_y      2		# Posición lado a lado
+position_z      8		# Altura
+rotation        -45		# Rotación sobre el eje x
+control_per_chan_1	-10
+control_per_chan_2	0
+end aerofoil
+
+# Right Control segment
+begin aerofoil
+copy control_i
+name control_d
+position_y      -2		# Posición lado a lado
+rotation        45		# Rotación sobre el eje x
+control_per_chan_1	10
+end aerofoil
+
+# Fuselage is constituited by two "disks" that define the head and
+# feet positions, just to aproximately simulate body position
+begin fuselage
+name fuselage
+segment 0.4 	0 	-0.6 	0		#  feet disk x, y, z and radius
+segment 0.6 	0 	-0.6 	0.3		#  feet disk x, y, z and radius
+segment 0.8 	0 	-0.6 	0		#  feet disk x, y, z and radius
+
+segment -0.5 	0 	0 	0			#  head x, y, z and radius
+segment -0.3 	0 	0 	0.3			#  head x, y, z and radius
+segment 0 	0 	0 	0				#  head x, y, z and radius
+
+end fuselage
+
+# Paramotor engine definition
+begin engine
+name engine
+min_force		0
+max_force		300
+max_airspeed	100
+bidirectional	false				# No reverse trust
+control_per_chan_3 1
+do_smoke		false				# Paramotors don't smoke... right?
+end engine

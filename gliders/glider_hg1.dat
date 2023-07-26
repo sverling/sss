@@ -1,0 +1,34 @@
+# general parameters
+###this glider is intended as a hang-glider robot only###
+##### This section contains general glider data ######
+
+mass      1.8 # glider mass
+I_x       0.6 # Moment of inertia about x
+I_y       0.2 # Moment of inertia about y
+I_z       0.9 # Moment of inertia about z
+
+aero_file      glider_scale.dat  # file containing the aerodynamic data
+structure_file glider_scale.dat  # file containing the structure data
+graphics_file  glider_hg1.dat  # file containing the graphics data
+engine_file    glider_scale.dat  # file containing the engine data
+
+aero_type      component
+structure_type component
+graphics_type  3ds
+engine_type    default
+
+3ds_file       hg-xs142p.3ds  # a low resolution version
+cull_backface  false
+
+##### This section contains details concerning the aero, structure etc ####
+
+begin fusalage
+name fusalage
+segment .78 0 1.45 0.00 #  nose x, y, z and radius
+segment -.64 0 1.2 0.01 # (z shortened from 2.5) kingpost x, y, z, r
+segment  -0.13 0.71 -.05 0.01 #  control bar x, y, z and radius
+segment -0.13 -0.71 -.05 0.01 # control bar 
+#segment  -1.7 4.75 1.1 0.1  # tip
+#segment  -1.7 -4.75 1.1 0.1 # tip
+#segment  -2.95  0 1.13 0.06 # keel
+end fusalage

@@ -1,0 +1,233 @@
+Mass		 0.450782E-01	(slug)
+I_xx		 0.664259E-01	(slug-ft^2)
+I_yy		 0.162819E-01	(slug-ft^2)
+I_zz		 0.814740E-01	(slug-ft^2)
+I_xz		 0.771958E-03	(slug-ft^2)
+C_ref		 0.551667    	reference chord  (ft)
+B_ref		 6.55000    	reference span   (ft)
+S_ref		 3.61111    	reference area   (ft^2)
+U_ref		 19.6850    	CD reference speed (ft/s)
+Alpha_0		 0.349066E-01	baseline alpha_0  (rad)
+Cm_0		 -0.112663E-01	baseline Cm_0 at alpha_0
+CL_0		 0.563172    	baseline CL_0 at alpha_0
+CL_max		 1.10000    	upper stall limit CL
+CL_min		 -0.600000    	lower stall limit CL
+CD_prof		 0.200000E-01	profile CD 
+Uexp_CD		 -0.500000    	CD Re-scaling exponent
+CL_a		 5.50360    	lift slope
+Cm_a		 -0.575335    	pitch stability
+CY_b		 -0.415610    	sideforce due to sideslip
+Cl_b		 -0.250926    	roll due to sideslip
+Cn_b		 0.567069E-01	yaw stability
+CL_q		 7.50999    	lift due to pitch rate
+Cm_q		 -11.4975    	pitch damping
+CY_p		 -0.423820    	sideforce due to roll rate
+Cl_p		 -0.611798    	roll damping
+Cn_p		 -0.740898E-01	yaw due to roll rate
+CY_r		 0.297540    	sideforce due to yaw rate
+Cl_r		 0.139581    	roll due to yaw rate
+Cn_r		 -0.687755E-01	yaw damping
+CL_de		 0.162000    	lift due to elevator
+Cm_de		 -0.75    	pitch due to elevator
+CY_dr		 0.000000E+00	sideforce doe to rudder
+Cl_dr		 0.000000E+00	roll due to rudder
+Cn_dr		 0.000000E+00	yaw due to rudder
+CY_da		 -0.135890    	sideforce due to aileron
+Cl_da		 +0.3 		Roll due to aileron
+Cn_da		 0.527143E-01	yaw due to aileron
+span_eff	 0.95		effective span
+CL_CD0		 0.0		set to as high as 0.30 for slow sections
+CD_CLsq		 0.01		deformation drag, as high as 0.02
+CD_AIsq		 0.0		drag due to aileron deflection
+CD_ELsq		 0.0		drag due to elevon deflection
+eta_loc		 0.3		eta_loc for stall model
+CG_arm		 0.25		CG_arm for stall model
+CL_drop		 0.5		CL drop during stall break
+max_thrust	 1.0            One pound max thrust
+initial_altitude 0.174		Starting altitude of airplane in feet
+initial_theta 	 -1.47		Starting pitch of airplane in degrees
+
+gear		12		Wheels and hard points on the airplane
+ locations                      Locations of wheels/hard points relative to CG
+  -0.0833  3.275     -0.5625
+  -0.3749  3.275     -0.5625
+  -0.0833  -3.275    -0.5625
+  -0.3749  -3.275    -0.5625
+  0	   2.58	     -0.1955
+  0	   -2.58     -0.1955
+  0	   1.25	     0.15
+  0	   -1.25     0.15
+   0.852   0	     0.1875
+  -2.75	   0	     -0.604
+  -2.75	   0	     0.2708
+  0	   0	     0.1875
+ springiness			lb/ft spring constant
+  10
+  10
+  10
+  10
+  60
+  60
+  10
+  10
+  30
+  10
+  10
+  10
+ damping			lb/ft/sec damping constant
+  0.2
+  0.2
+  0.2
+  0.2
+  0.1
+  0.1
+  0.2
+  0.2
+  0.2
+  0.2
+  0.2
+  0.2
+ braking			Percentage of max braking applied initially
+  1.0	
+  1.0	
+  1.0	
+  1.0
+  1.0
+  1.0
+  1.0
+  1.0
+  0.7
+  0.7
+  0.7
+  0.7
+ steerability	     Channel number and max wheel angle for max stick input
+  0	0
+  0	0
+  0	0
+  0	0
+  0	0
+  0	0
+  0	0
+  0	0
+  0	0
+  0	0
+  0	0
+  0	0
+end_gear          Obligatory comment to make sure the file is parsed correctly
+
+extrusion	5	wing
+ translate                      Translate entire wing
+  0 -0.0625 0.275 
+rotate                         Add 2 degree decalage
+  270 0 0
+ up_vector			Y axis of section corresponds in 3D
+0 0 1
+ path				Coordinates of rib starting points XYZ
+  2.5   	-.3 	0
+  0   0	0
+  0    0  	0
+  0	 0	0
+ -2.5  	.0  	0
+ colors				Colors of each rib RGB
+	1 0 0
+	1 1 1
+	1 1 0
+	1 1 1
+ 	1 0 0
+ scaling		To perform magnification, set elements 1,5=mag
+  .5030  	0      0.2351  	0     0.629     	0
+  .7557  	0   	 0		0  	0.7557	0
+  .7557 	0 	 0	 	0  	1.0		0
+  .7557  	0  	 0		0  	0.7557	0
+  .5030 	0  	 0.2351	0  	0.629      0
+section		Airfoil section with 11 points, must start and end on same
+  11
+.8076 	0	
+.5878 	.0419
+.335 		.0524
+.1889 	.0577
+.0629 	.04198
+.0209 	.0209
+0 		0
+.0209 	-.0210
+.12569 	-.0219
+.2834 	-.0209
+.80776 	0
+end_extrusion		This is the end of the wing extrusion
+
+extrusion  2	fin
+ translate                      Translate entire wing
+  0 -.105 -.76
+ up_vector		Y axis of section corresponds to this direction
+  1 0 0
+ path			Vertical fin
+  0	.4  0
+  0   0	 0
+colors			White fin
+  1	0	0
+  1	1 	0       
+
+scaling			Weird taper
+  1.5	0	-.23	0	1	0
+ 3	0	0	0	1	0
+  
+section                 7 point fin airfoil
+ 6
+ 0.14	-0.01
+ 0.07	-0.007
+ 0	0
+ 0.07   0.007
+ 0.14	0.01
+ 0.14	-0.01
+end_extrusion         End fin
+
+
+cylinder  1	      Tailboom
+ translate				Translate to the tail hinge line
+  0    -0.104  -0.7
+ rotate					No rotation.
+  0    0   0
+ dimension				radius 1, radius 2, length of cylinder
+  0.01  0.07	.95   
+ grid					10x10 sampling of the cylinder
+  10	  4
+ color					A carbon black color
+  0 0 1 1
+end_cylinder				End tailboom
+
+cylinder  2	      Nose
+ translate				Translate to the nose break line
+  0    -0.104  0.25
+ rotate					No rotation.
+  0    0   0
+ dimension				radius 1, radius 2, length of cylinder
+  0.07  0.03	0.452   
+ grid					10x10 sampling of the cylinder
+  10	  4
+ color					A carbon black color
+  0 0 1 1
+end_cylinder				End of nose section
+
+sphere	1	Nose
+ translate				Go to the nose
+  0    -0.104  0.702
+ rotate					Same rotation as fuselage
+  0    0  0
+ dimension				Same radius as end of cylinder
+  0.03
+ grid					Same slices as end of cylinder
+  10 4
+ color					Same color as fuselage
+  1 0 0 1
+end_sphere				End of nose
+
+
+
+
+
+
+
+
+
+
+

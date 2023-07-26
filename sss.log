@@ -1,0 +1,31 @@
+Slope Soaring Simulator (v2.19.0) - Copyright 2006 Danny Chapman
+SSS by Danny Chapman:
+    sss@rowlhouse.freeserve.co.uk
+SSS comes with ABSOLUTELY NO WARRANTY;
+This is free software, and you are welcome to redistribute it
+under certain conditions; see the GNU General Public License
+
+PLIB Joystick 0 not working/detected - use mouse/keyboard instead
+trying with visual string "rgb double depth>=24"
+checking result...
+Creating window  ...  created... with depth size = 32
+GL vendor = NVIDIA Corporation, renderer = GeForce FX 5600/AGP/SSE/3DNOW!, version = 2.1.1
+Reading raw data file: terrains/Slope2.raw
+Finished reading the terragen data
+level = 18, nx = 513
+out_size = 436909
+Using runtime wind-field
+No material for object 01931110 - wanted MAT_Fin_3
+Smoke texture 128 128
+Created robot pilot as main glider
+Created robot pilot with offset 5
+Warning - dt is too large, clamping to 0.5 sec
+Initialising shadow texture 256 256
+Reading textures/Slope2_front.png Has no alpha 1024 1024
+Reading textures/Slope2_left.png Has no alpha 1024 1024
+Reading textures/Slope2_back.png Has no alpha 1024 1024
+Reading textures/Slope2_right.png Has no alpha 1024 1024
+Reading textures/Slope2_up.png Has no alpha 1024 1024
+Reading textures/Slope2_down.png Has no alpha 1024 1024
+Warning - dt is too large, clamping to 0.5 sec
+Displayed a couple of frames - closing the console window

@@ -1,0 +1,177 @@
+# This makefile uses make recursively to allow for two separate
+# builds: debug and opt (the latter being the default).
+
+# If you don't want to get GLUI, GLE, or PLIB, or don't have glext.h,
+# modify the EXTRA_FLAGS line before building.
+#
+# If using FMOD, there is the flag -DUSE_FMOD_3_6 to indicate that
+# you're using an old FMOD library. I needed this as 3.61 doesn't work
+# for me! Everyone else should probably delete it and use fmod 3.61
+CC = g++
+#OPT_FLAGS = -O3 -ffast-math -finline-functions
+OPT_FLAGS = -O3 -finline-functions  -mpowerpc-gfxopt
+# -Wall -pedantic
+DEBUG_FLAGS = -g -Wall -pedantic
+#EXTRA_FLAGS = -I/usr/X11R6/include -DWITH_GL_EXT -DWITH_GLUI -DWITH_GLE -DWITH_PLIB -DUSE_FUNCTION -DWITH_FMOD
+OSXINCLUDES=-Dunix
+OSXFRAMEWORKS=-framework GLUT -framework OpenGL -framework Carbon -framework IOKit -framework Cocoa
+EXTRA_FLAGS = -I/usr/local/include -DWITH_GL_EXT -DWITH_GLUI -DWITH_GLE -DWITH_PLIB -DUSE_FUNCTION -DWITH_FMOD $(OSXINCLUDES)
+# Add  -lplibsm -lplibsl  to LDFLAGS if you're not using FMOD, but you are using PLIB
+#LDFLAGS = -L/usr/X11R6/lib -lpthread -lplibjs -lplibfnt -lplibsg -lplibul -lglui -lglut -lgle -lGLU -lGL -lX11 -lXmu -lfmod -lpng
+LDFLAGS = -lpthread -lz -L/usr/local/lib -lplibjs -lplibfnt -lplibsg -lplibul -lglui -lfmod -lpng $(OSXFRAMEWORKS)
+
+SRC = \
+graphics_3ds.cpp \
+gyro.cpp \
+propeller.cpp \
+image_from_file.cpp \
+ski.cpp \
+tree_collection.cpp \
+tree.cpp \
+particle_engine.cpp \
+particle_source.cpp \
+3ds.cpp \
+aerofoil.cpp \
+audio.cpp \
+bludger.cpp \
+body.cpp \
+config.cpp \
+config_file.cpp \
+control_method.cpp \
+environment.cpp \
+explosion.cpp \
+fft2d.cpp \
+fuselage.cpp \
+glider.cpp \
+glider_aero.cpp \
+glider_aero_component.cpp \
+glider_aero_crrcsim.cpp \
+glider_engine.cpp \
+glider_graphics.cpp \
+glider_graphics_3ds.cpp \
+glider_graphics_component.cpp \
+glider_graphics_crrcsim.cpp \
+glider_power.cpp \
+glider_structure.cpp \
+glider_structure_3ds.cpp \
+glider_structure_component.cpp \
+glider_structure_crrcsim.cpp \
+gui.cpp \
+joystick.cpp \
+lod.cpp \
+log_trace.cpp \
+main.cpp \
+missile.cpp \
+object.cpp \
+physics.cpp \
+pilot_manager.cpp \
+race_manager.cpp \
+remote_sss_iface.cpp \
+remote_sss_queue.cpp \
+renderer.cpp \
+robot_pilot.cpp \
+sss.cpp \
+sss_socket.cpp \
+terrain_generator.cpp \
+text_overlay.cpp \
+texture.cpp \
+thermal.cpp \
+thermal_manager.cpp \
+tracer.cpp \
+tx_audio_input.cpp \
+vertex.cpp \
+wind_field_generator.cpp
+
+# gets over-ridden on the real make
+OBJDIR := .
+OBJS := $(SRC:%.cpp=$(OBJDIR)/%.o)
+
+#default target
+opt: .opt
+	@echo "############ Starting Optimised build #########################"
+	$(MAKE) ../sss CFLAGS="$(OPT_FLAGS) $(EXTRA_FLAGS)" OBJDIR=.opt
+
+debug: .debug
+	@echo "############ Starting debug build ##############################"
+	$(MAKE) ../sss_debug CFLAGS="$(DEBUG_FLAGS) $(EXTRA_FLAGS)" OBJDIR=.debug
+
+gprof: .gprof
+	@echo "############ Starting gprof build ##############################"
+	$(MAKE) ../sss_gprof CFLAGS="-pg $(OPT_FLAGS) $(EXTRA_FLAGS)" OBJDIR=.gprof
+
+../sss: $(OBJS)
+	$(CC) $(CFLAGS) -o $@ $(OBJS) $(LDFLAGS) 
+
+../sss_debug: $(OBJS)
+	$(CC) $(CFLAGS) -o $@ $(OBJS) $(LDFLAGS) 
+
+../sss_gprof: $(OBJS)
+	$(CC) $(CFLAGS) -o $@ $(OBJS) $(LDFLAGS) 
+
+.debug:
+	mkdir .debug
+
+.opt:
+	mkdir .opt
+
+.gprof:
+	mkdir .gprof
+
+doc: FORCE
+	doxygen sss.dox
+
+bw_to_orog: bw_to_orog.cpp
+	$(CC) -g -o $@ bw_to_orog.cpp
+
+tiff_to_orog: tiff_to_orog.c
+	$(CC) -g -o $@ tiff_to_orog.c -ltiff
+
+FORCE:
+
+clean: debug_clean opt_clean gprof_clean
+
+debug_clean:
+	\rm -f *~ .debug/* sss_debug
+
+opt_clean:
+	\rm -f *~ .opt/* sss
+
+gprof_clean:
+	\rm -f *~ .gprof/* sss_gprof
+
+# needs fixing...
+sss-%-src.tar.gz: FORCE
+	@(ls *.cpp *.h *.inl Makefile \
+                icosahedron.dsp icosahedron.dsw icosahedron.opt \
+                license.txt readme.txt about_the_code.txt \
+                ground_b_128.rgb ground_c_128.rgb \
+                cloud_128.rgb sun_128.rgb sea_128.rgb sand_128.rgb \
+                sss.cfg \
+                glider_hawk.dat hawk.3ds glider_rudder.dat \
+                glider_neoslope.dat neo_slope.3ds \
+                glider_phase6.dat phase6.3ds \
+                glider_sierra_mk2.dat glider_wizard.dat \
+                glider_wing.dat glider_eagle.dat \
+                glider_crrcsim_f3f.dat f3f.air \
+                eagle.3ds wizard.3ds \
+                glider.wav explosion.wav font.txf \
+                robot.dat \
+                terrain_flat.dat \
+                sss.dox | sed 's/\([^ ]*\)/sss-$(@:sss-%-src.tar.gz=%)\/\1/g' >MANIFEST)
+	@(cd ..; rm sss-$(@:sss-%-src.tar.gz=%); ln -s sss sss-$(@:sss-%-src.tar.gz=%))
+	(cd ..; tar czvfh sss/$@ `cat sss/MANIFEST`)
+	@(cd ..; rm sss-$(@:sss-%-src.tar.gz=%))
+
+# How we get a .o from a .cpp
+$(OBJDIR)/%.o: %.cpp
+	$(CC) -c $(CFLAGS) -o $@ $<
+
+$(OBJDIR)/%.d: %.cpp
+	$(CC) -MM $(CFLAGS) $< | sed -e "s/\(^[a-zA-Z]\)/$(OBJDIR)\/\1/" -e 's@^\(.*\)\.o:@\1.d \1.o:@' > $@
+
+ifneq ($(OBJDIR),.)
+-include $(OBJS:.o=.d)
+endif
+
+
+

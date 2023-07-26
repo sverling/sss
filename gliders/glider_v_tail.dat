@@ -1,0 +1,21 @@
+# general parameters for a wing
+
+##### This section contains general glider data ######
+
+mass  2.5   #  glider mass
+I_x   0.7  #  Moment of inertia about x
+I_y   0.19  #  Moment of inertia about y
+I_z   0.9  #  Moment of inertia about z
+
+aero_file      glider_v.dat  # file containing the aerodynamic data
+structure_file glider_v.dat  # file containing the structure data
+graphics_file  glider_v_tail.dat  # file containing the graphics data
+engine_file    glider_v.dat  # file containing the engine data
+
+aero_type      component
+structure_type component
+graphics_type  3ds
+engine_type    default
+
+3ds_file v_tail.3ds
+cull_backface  true

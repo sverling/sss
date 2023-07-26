@@ -1,0 +1,19 @@
+# general parameters for a wing
+
+##### This section contains general glider data ######
+
+mass  1.5   #  glider mass
+I_x   0.3  #  Moment of inertia about x
+I_y   0.3  #  Moment of inertia about y
+I_z   0.5  #  Moment of inertia about z
+
+aero_file      glider_wing.dat  # file containing the aerodynamic data
+structure_file glider_wing.dat  # file containing the structure data
+graphics_file  glider_twinjet.dat  # file containing the graphics data
+engine_file    glider_wing.dat  # file containing the engine data
+
+aero_type      component
+structure_type component
+graphics_type  3ds
+engine_type    default
+3ds_file twinjet.3ds

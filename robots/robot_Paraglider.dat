@@ -1,0 +1,27 @@
+# This file contains the parameters for a robot pilot flying. Reference this
+# file from flight.cfg (with a robot_file line), and then press 'o'
+# to create a robot when flying.
+
+# The glider file to use. If more than one file, new robots will use each glider file in turn
+
+glider_file glider_1Paraglider_NC_Y.dat glider_1Paraglider_NC_R.dat glider_1Paraglider_NC_G.dat
+
+# These parameters should be glider-dependant... but they seem to work
+# reasonably OK for most gliders!
+focal_dist 50           # distance away from starting point
+focal_point_par_range 100  # new targets fall within this distance (par to hill)
+focal_point_perp_range 15 # new targets fall within this distance (perp to hill)
+focal_point_height_range 6 # and for height
+speed_min 7             # this and speed_ideal define the range of OK air speeds
+speed_ideal 10          # The air speed to aim for in level flight
+target_range 30         # How close we have to get to a target before choosing another
+max_bank_angle 80       # angle at which we use full control to restore
+max_pitch_angle 45      # angle at which we use full control to restore
+max_pitch_amount 20     # aim to descend/climb at most this pitch angle
+elev_aileron_frac 0.2   # when abs(aileron) control = 1, elev control = this
+bank_angle_for_max_elev 40 # apply max elevator at this bank angle
+pitch_per_height_offset 10 # when we are 1m above the target, aim to pitch down 
+chase_time  0           # time in seconds to spend chasing the human
+cruise_time 100           # time to spend just cruising around
+missile_recharge_time 10 # min time between robots firing missiles
+missile_trigger 0        # How trigger happy the robot is (0 to around 10)

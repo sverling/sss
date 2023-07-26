@@ -1,0 +1,328 @@
+Mass	  0.369018E-01	(slug)
+I_xx	  0.208188E-01	(slug-ft^2)
+I_yy	  0.449063E-02	(slug-ft^2)
+I_zz	  0.252959E-01	(slug-ft^2)
+I_xz	   0.00000    	(slug-ft^2)
+C_ref	  0.833333    	reference chord  (ft)
+B_ref	   4.00000    	reference span   (ft)
+S_ref	   3.33333    	reference area   (ft^2)
+U_ref	   19.6850    	CD reference speed (ft/s)
+Alpha_0	   0.00000    	baseline alpha_0  (rad)
+Cm_0	  0.100395E-01	baseline Cm_0 at alpha_0
+CL_0	  0.132896    	baseline CL_0 at alpha_0
+CL_max	   1.10000    	upper stall limit CL
+CL_min	 -0.800000    	lower stall limit CL
+CD_prof	  0.25000E-01	profile CD 
+Uexp_CD	 -0.500000    	CD Re-scaling exponent
+CL_a	   4.08115    	lift slope
+Cm_a	 -0.422680    	pitch stability
+CY_b	 -0.107990    	sideforce due to sideslip
+Cl_b	 -0.524900E-01	roll due to sideslip
+Cn_b	  0.213716E-01	yaw stability
+CL_q	   4.90714    	lift due to pitch rate
+Cm_q	  -1.68929    	pitch damping
+CY_p	 -0.385900E-01	sideforce due to roll rate
+Cl_p	 -0.425470    	roll damping
+Cn_p	 -0.882313E-03	yaw due to roll rate
+CY_r	  0.595832E-01	sideforce due to yaw rate
+Cl_r	  0.442800E-01	roll due to yaw rate
+Cn_r	 -0.122373E-01	yaw damping
+CL_de	  0.491440    	lift due to elevator
+Cm_de	 -0.210653    	pitch due to elevator
+CY_dr	   0.00000    	sideforce due to rudder
+Cl_dr	   0.00000    	roll due to rudder
+Cn_dr	   0.00000    	yaw due to rudder
+CY_da	  0.204900E-01	sideforce due to aileron
+Cl_da	  0.133270    	roll due to aileron
+Cn_da	 -0.725753E-02	yaw due to aileron
+span_eff 0.85		effective span
+CL_CD0	 0.30		set to as high as 0.30 for slow sections
+CD_CLsq	 0.02		deformation drag, as high as 0.02
+CD_AIsq	 0.04		drag due to aileron deflection
+CD_ELsq	 0.04		drag due to elevon deflection
+eta_loc	  0.25		eta_loc for stall model
+CG_arm	  0.25		CG_arm for stall model
+CL_drop	  0.1		CL drop during stall break
+initial_altitude 5		Starting altitude of airplane in feet
+initial_velocity 40		Fast handlaunch
+initial_theta 	 0		Starting pitch of airplane in degrees
+max_thrust	0.6		Max thrust of 0.2 pounds
+gear		7		Wheels and hard points on the airplane
+ locations                      Locations of wheels/hard points relative to CG
+  0.666667  0	    0.0625
+  -0.41663  2	    0.0625
+  -0.41663  -2	    0.0625
+  -1	     2	    0.125
+  -1        -2	    0.125
+  -1	     2	    -0.2291667
+  -1        -2	    -0.2291667
+ springiness			lb/ft spring constant
+  35
+  35
+  35
+  35
+  35
+  35
+  35
+ damping			lb/ft/sec damping constant
+  0.15
+  0.05
+  0.05
+  0.05
+  0.05
+  0.05
+  0.05
+ braking			Percentage of max braking applied initially
+  0.5	
+  0.5	
+  0.5	
+  0.5
+  0.5
+  0.5
+  0.5
+ steerability	     Channel number and max wheel angle for max stick input
+  0	0
+  0	0
+  0	0
+  0	0
+  0	0
+  0	0
+  0	0
+end_gear          Obligatory comment to make sure the file is parsed correctly
+
+
+extrusion	3	wing
+ translate                      Translate entire wing
+  0 -0.0625 0
+ rotate                         Add 2 degree decalage
+  0 0 0
+ up_vector			Y axis of section corresponds in 3D
+  0 1 0
+ path				Coordinates of rib starting points XYZ
+  0.208  0       0.666667
+   0      0       0.666667
+  -0.208  0	  0.666667
+ colors				Colors of each rib RGB
+   0.2 0.2 0.2
+   0.2 0.2 0.2
+   0.2 0.2 0.2
+scaling		To perform magnification, set elements 1,5=mag 3=xtranslation
+ 0.8958	  0	 0.1041	 0	0.8958	   0
+ 1.0	  0	 0	 0	1	   0
+ 0.8958	  0	 0.1041	 0	0.8958	   0 
+section		Airfoil section with 11 points, must start and end on same
+  16
+  1		0.0104
+  0.75		0.04166667
+  0.5208	0.0625
+  0.375		0.072916
+  0.25		0.067708
+  0.10416	0.05208
+  0.04166	0.03645
+  0		0	
+  0.02083	-0.015625
+  0.083333	-0.02083	
+  0.2083	-0.0234
+  0.39583	-0.02183
+  0.729		-0.02083
+  0.98		-0.0104
+  1		-0.0104
+  1		0.0104
+end_extrusion		This is the end of the wing extrusion
+
+extrusion	2	left_wing
+ translate                      Translate entire wing
+  0 -0.0625 0
+ rotate                         Add 2 degree decalage
+  0 0 0
+ up_vector			Y axis of section corresponds in 3D
+  0 1 0
+ path				Coordinates of rib starting points XYZ
+  -0.208      0  0.666667
+  -2.0  0       0.666667
+ colors				Colors of each rib RGB
+  1.0     0.439  0.176
+  1.0 	  0.439	 0.176
+scaling		To perform magnification, set elements 1,5=mag 3=xtranslation
+ 0.8958   0	 0.1041	 0	0.8958	   0 
+ 0.39215  0	 1.0833	 0	0.39215	   0
+section		Airfoil section with 11 points, must start and end on same
+  16
+  1.0625	0
+  1		0.0104
+  0.75		0.04166667
+  0.5208	0.0625
+  0.375		0.072916
+  0.25		0.067708
+  0.10416	0.05208
+  0.04166	0.03645
+  0		0	
+  0.02083	-0.015625
+  0.083333	-0.02083	
+  0.2083	-0.0234
+  0.39583	-0.02183
+  0.729		-0.02083
+  1		-0.0104
+  1.0625	0
+end_extrusion		This is the end of the wing extrusion
+
+extrusion	2	right_wing
+ translate                      Translate entire wing
+  0 -0.0625 0
+ rotate                         Add 2 degree decalage
+  0 0 0
+ up_vector			Y axis of section corresponds in 3D
+  0 1 0
+ path				Coordinates of rib starting points XYZ
+  2.0	     0  0.666667
+  0.208      0  0.666667
+ colors				Colors of each rib RGB
+  1.0     0.439  0.176
+  1.0 	  0.439	 0.176
+scaling		To perform magnification, set elements 1,5=mag 3=xtranslation
+ 0.39215  0	 1.0833	 0	0.39215	   0
+ 0.8958   0	 0.1041	 0	0.8958	   0 
+section		Airfoil section with 11 points, must start and end on same
+  16
+  1.0625	0
+  1		0.0104
+  0.75		0.04166667
+  0.5208	0.0625
+  0.375		0.072916
+  0.25		0.067708
+  0.10416	0.05208
+  0.04166	0.03645
+  0		0	
+  0.02083	-0.015625
+  0.083333	-0.02083	
+  0.2083	-0.0234
+  0.39583	-0.02183
+  0.729		-0.02083
+  1		-0.0104
+  1.0625	0
+end_extrusion		This is the end of the wing extrusion
+
+extrusion	2	left_elevon
+ translate                      Translate entire wing
+  0 -0.0625 0
+ rotate                         Add 2 degree decalage
+  0 0 0
+ up_vector			Y axis of section corresponds in 3D
+  0 1 0
+ path			Coordinates of rib starting points XYZ
+  -0.208  0  -0.39583
+  -2.0    0  -0.39583
+ colors				Colors of each rib RGB
+  0.2 	  0.2	 0.2
+  0.2     0.2    0.2
+scaling		To perform magnification, set elements 1,5=mag 3=xtranslation
+ 1.0      0	 0	 0	1	   0 
+ 2.0      0	 0.44    0	2.0	   0
+section		Airfoil section with 4 points, must start and end on same
+  4
+  0.08333       0
+  0		0.005208
+  0		-0.005208
+  0.08333	0
+end_extrusion		This is the end of the wing extrusion
+
+extrusion	2	right_elevon
+ translate                      Translate entire wing
+  0 -0.0625 0
+ rotate                         Add 2 degree decalage
+  0 0 0
+ up_vector			Y axis of section corresponds in 3D
+  0 1 0
+ path				Coordinates of rib starting points XYZ
+  2.0	     0  -0.39583
+  0.208      0  -0.39583
+ colors				Colors of each rib RGB
+  0.2 	  0.2	 0.2
+  0.2     0.2    0.2
+scaling		To perform magnification, set elements 1,5=mag 3=xtranslation
+ 2.0      0	 0.44    0	2.0	   0
+ 1.0      0	 0	 0	1	   0 
+section		Airfoil section with 4 points, must start and end on same
+  4
+  0.0833       0
+  0	       0.005208
+  0		-0.005208
+  0.0833	0
+end_extrusion		This is the end of the wing extrusion
+
+cylinder 1	fuselage
+ translate		 Translate to the end of the fuselage pod
+  0    -0.0104  -0.125  
+ rotate                  No rotation
+  0  0  0 
+ dimension               Dimensions of pod 
+  0.07   0.07  0.70833
+grid			 Number of sample points radially and longitudinally
+  10 2
+color                    Yellow
+  1.0 1.0 0.0 1.0       
+end_cylinder		 End cylinder
+
+cylinder 2	fuselage
+ translate		 Translate to the end of the fuselage pod
+  0    0.0154  -0.3125  
+ rotate                  No rotation
+  0  0  0 
+ dimension               Dimensions of pod 
+  0.09   0.09  0.20833
+grid			 Number of sample points radially and longitudinally
+  10 2
+color			 Yellow
+  1.0 1.0 0.0 1.0        
+end_cylinder		 End cylinder
+
+sphere  1		 nose
+ translate		 Translate to nose
+  0  -0.0104  0.58333
+ rotate			  No rotation
+  0  0  0
+ dimension               Same as cylinder radius
+  0.07
+ grid			 Same as cylinder for a good fit
+  10 4
+ color			 Same as cylinder
+  1.0 1.0 0.0 1.0
+end_sphere		 End nose
+
+
+triangles 2		 left_winglet
+ translate		 Translate to the leading edge at the left winglet
+  -2.0 -0.0625 -0.416633
+ rotate			 No rotation
+  0  0  0
+ color			 White winglet
+  1.0 1.0 1.0 1.0 
+ vertices		 List vertices  3x3xnum_triangles CCW order
+  0      0         0
+  0	 -0.0625   -0.625
+  0	 0.29166   -0.625
+  0      0         0
+  0	 0.29166   -0.625
+  0	 -0.0625   -0.625
+end_triangles		 End of left winglet
+
+
+triangles 2		 left_winglet
+ translate		 Translate to the leading edge at the left winglet
+  2.0 -0.0625 -0.416633
+ rotate			 No rotation
+  0  0  0
+ color			 White winglet
+  1.0 1.0 1.0 1.0 
+ vertices		 List vertices  3x3xnum_triangles  CCW order
+  0      0         0
+  0	 -0.0625   -0.625
+  0	 0.29166   -0.625
+  0      0         0
+  0	 0.29166   -0.625
+  0	 -0.0625   -0.625
+end_triangles		 End of left winglet
+
+
+
+
